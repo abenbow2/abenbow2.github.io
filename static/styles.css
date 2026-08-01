@@ -1,0 +1,146 @@
+body {
+    /*background-image: url("background.png");*/
+    background-color: rgb(48, 38, 58);
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url(robotovariablefont_wght.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url(merriweathervariable.ttf) format('truetype');
+}
+
+h1 {
+    font-family: "Merriweather", Georgia, Arial, sans-serif;
+    color: whitesmoke;
+    
+    text-align: center;
+    font-size: 80px;
+    font-weight: 600;
+    padding: 10px;
+    margin: 0 0 0 0;
+}
+
+h2 {
+    text-align: left;
+    font-size: 48px;
+    font-weight: 600;
+    padding: 10px;
+    margin: 0 0 0 0;
+}
+
+h3 {
+    text-align: left;
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 0 0;
+}
+
+a {
+    color: rgb(132, 77, 149);
+}
+
+li {
+    align-self: flex-start;
+    font-size: 16px;
+}
+
+.flexSection {
+    display: flex;
+    align-items: flex-start;
+    margin: 5px 0 5px 0;
+}
+
+.header {
+    margin: 50px 265px 0 15px;
+    width: auto;
+}
+
+.main-section {
+    color: rgb(6, 4, 8);
+    font-family: "Roboto", Arial, sans-serif;
+    
+    text-align: left;
+    font-size: 24px;
+    font-weight: 400;
+
+    background-color: rgba(237, 232, 239, 1);
+
+    width: auto;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 15px;
+    margin-right: 265px;
+    padding: 15px;
+
+    border: 2px black solid;
+    border-radius: 5px;
+
+    overflow-x: hidden;
+}
+
+.subsection {
+    width: auto;
+    height: auto;
+    margin: 0 15px 15px 15px;
+    display: block;
+    overflow-x: hidden;
+}
+
+.subsectionImage {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    margin: 10px 10px 10px 0;
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(203, 200, 205);
+}
+
+.subsectionText {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.subsection a {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 250px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #141214;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    margin-left: 10%;
+}
+
+.sidenav a {
+    margin-left: 20px;
+    margin-bottom: 18px;
+    margin-right: 20px;
+    font-size: 36px;
+    font-weight: 500;
+    font-family: Verdana, Arial, sans-serif;
+    display: block;
+    text-align: left;
+}
+.sidenav a:link, .sidenav a:visited {
+    color: rgb(237, 232, 239);
+    text-decoration: none;
+}
+
+.sidenav a:hover, .sidenav a:active {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+}

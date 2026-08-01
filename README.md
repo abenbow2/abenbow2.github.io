@@ -1,5 +1,4 @@
 # abenbow2.github.io
-CS 416 Final Project - Narrative Visualizaton
-Summer 2026
+CS 416 Final Project - Narrative Visualizaton (Summer 2026)
+https://abenbow2.github.io/CS%20416/narrativevis.html
 
-Dataset Used: https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students
