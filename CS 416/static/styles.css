@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(27, 43, 59);
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url(robotovariablefont_wght.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url(merriweathervariable.ttf) format('truetype');
+}
+
+h1 {
+    font-family: "Merriweather", Georgia, Arial, sans-serif;
+    color: whitesmoke;
+    
+    text-align: center;
+    font-size: 80px;
+    font-weight: 600;
+    padding: 10px;
+    margin: 0 0 0 0;
+}
+
+h2 {
+    text-align: left;
+    font-size: 48px;
+    font-weight: 600;
+    padding: 10px;
+    margin: 0 0 0 0;
+}
+
+h3 {
+    text-align: left;
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 0 0;
+}
+
+a {
+    color: rgb(244, 249, 249);
+}

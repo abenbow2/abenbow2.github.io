@@ -29,9 +29,18 @@ var ARTS_GPADifference = [];
 var HUM_GPADifference = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    CalculateGPADifference(STEM_PreSemesterGPA, STEM_PostSemesterGPA, STEM_GPADifference);
+    Load_STEM_Scene();
 });
 
 function CalculateGPADifference(presemester_GPA, postsemester_GPA, results) {
     console.log("test");
+
+    for (let i = 0; index < 10000; index++) {
+        results[i] = postsemester_GPA[i] - presemester_GPA[i];
+    }
+}
+
+function Load_STEM_Scene() {
+    CalculateGPADifference(STEM_PreSemesterGPA, STEM_PostSemesterGPA, STEM_GPADifference);
+    console.log(STEM_GPADifference[0]);
 }
