@@ -74,8 +74,8 @@ function Load_Scene(SubjectData) {
     var arc = d3.arc().innerRadius(0).outerRadius(150);
     var pie_chart = d3.pie().value(function(d) {return d.value; });
     var color_pie = ["blue", "red"];
-    var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");;
-    
+    var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    console.log(MoreAI_vs_MoreStudy(SubjectData));
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
 
