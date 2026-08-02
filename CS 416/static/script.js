@@ -75,7 +75,7 @@ function Load_Scene(SubjectData) {
     ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
-    var color_pie = ["#053A56", "#C0C0C0"];
+    var color_pie = ["#053A56", "#b1bdd4"];
 
     var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
@@ -83,21 +83,29 @@ function Load_Scene(SubjectData) {
     // Labels found from https://cagrimmett.com/2016/08/19/d3-pie-chart/
     var labelArc = d3.arc().outerRadius(radius - 20).innerRadius(radius - 20);
     main_pie_chart_svg.append("text").attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; }).text(function(d) { return d;}).style("fill", "#ffffff");
+    console.log("test");
 
+    
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
 
 }
 
 function Load_Pie_Chart(SubjectData) {
     // AI Primary usage
+    d3.select("#main_scene").html(null);
+    d3.select("#main_scene").append("h2").html(`How Students in ${SubjectData.name} Use AI`);
 }
 
 function Load_Bar_Chart(SubjectData) {
     // More AI vs More Study vs Average GPA
+    d3.select("#main_scene").html(null);
+    d3.select("#main_scene").append("h2").html(`GPA of Students Who Spend More Time Using AI or More Time Studying`);
 }
 
 function Load_Scatter_Plot(SubjectData) {
     // Weekly AI usage (hours) vs GPA
+    d3.select("#main_scene").html(null);
+    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
