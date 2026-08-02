@@ -73,6 +73,17 @@ a {
     align-items: center;
 }
 
+#main_charts div:hover {
+    flex-grow: 3;
+    border-style: solid;
+    border-width: 4px;
+    border-color: rgb(0, 128, 255);
+}
+
+#main_charts h3, #main_charts h4 {
+    text-align: center;
+}
+
 #ai_vs_studying {
     flex-direction: column;
 }
@@ -89,4 +100,6 @@ button {
     border-radius: 5px;
     border-color: rgb(27, 43, 59);
     margin: 25px;
+    font-family: "Merriweather", Georgia, Arial, sans-serif;
+    font-weight: 500;
 }
