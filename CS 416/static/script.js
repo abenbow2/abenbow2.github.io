@@ -62,10 +62,10 @@ function Load_Scene(SubjectData) {
     // var main_chart = document.getElementById("main_chart");
 
     d3.select("#main_scene").html(null);
-    d3.select("#main_scene").append("h2").innerHTML = "AI Usage Among Students in " + SubjectData.name;
+    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
     // SubjectData.CalculateGPADifference();
     var ai_users_percent = d3.select("#main_scene").append("div");
-    ai_users_percent.append("h3").innerHTML = Calculate_AI_Users_Percentage(SubjectData) + "% of students use AI more than an hour each week"
+    ai_users_percent.append("h3").html(`${Calculate_AI_Users_Percentage(SubjectData)}% of students use AI more than an hour each week`);
 
 }
 
