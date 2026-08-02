@@ -73,6 +73,10 @@ a {
     align-items: center;
 }
 
+#ai_vs_studying {
+    flex-direction: column;
+}
+
 p {
     color: azure;
     font-size: 16px;
