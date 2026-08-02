@@ -69,6 +69,12 @@ function Load_Scene(SubjectData) {
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
+    var arc = d3.arc();
+    var pie_chart = d3.pie();
+    var color_pie = ["blue", "red"];
+    main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", 300).height("height", 300);
+    main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
+
 
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
 
@@ -96,4 +102,21 @@ function Calculate_AI_Users_Percentage(SubjectData) {
         }
     
     return Math.trunc((AI_greater_than_hour / 10000) * 100);
+}
+
+function MoreAI_vs_MoreStudy(SubjectData) {
+    var AI_greater_than_study = [0,0];
+
+    for (let i = 0; i < 10000; i++) {
+        if (SubjectData.weekly_AI_time[i] > SubjectData.study_time[i]) {
+            AI_greater_than_study[0]++;
+        } else {
+            AI_greater_than_study[1]++;
+        }
+    }
+
+    AI_greater_than_study[0] = Math.trunc((AI_greater_than_study[0] / 10000) * 100);
+    AI_greater_than_study[1] = Math.trunc((AI_greater_than_study[1] / 10000) * 100);
+    
+    return AI_greater_than_study;
 }
