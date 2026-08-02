@@ -67,6 +67,10 @@ function Load_Scene(SubjectData) {
     var ai_users_percent = d3.select("#main_scene").append("div");
     ai_users_percent.append("h3").html(`${Calculate_AI_Users_Percentage(SubjectData)}% of students use AI more than an hour each week`);
 
+    var ai_vs_studying_pie = d3.select("#main_scene").append("div");
+
+    var average_GPA_vs_usage = d3.select("#main_scene").append("div");
+
 }
 
 function Load_Pie_Chart(SubjectData) {
