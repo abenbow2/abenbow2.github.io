@@ -61,10 +61,24 @@ document.addEventListener('DOMContentLoaded', function() {
 function Load_Scene(SubjectData) {
     // var main_chart = document.getElementById("main_chart");
 
-    d3.select("#main_scene").innerHTML.remove();
+    d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").innerHTML = "AI Usage Among Students in " + SubjectData.name;
-    SubjectData.CalculateGPADifference();
+    // SubjectData.CalculateGPADifference();
+    var ai_users_percent = d3.select("#main_scene").append("div");
+    ai_users_percent.append("h3").innerHTML = Calculate_AI_Users_Percentage(SubjectData) + "% of students use AI more than an hour each week"
 
+}
+
+function Load_Pie_Chart(SubjectData) {
+    // AI Primary usage
+}
+
+function Load_Bar_Chart(SubjectData) {
+    // More AI vs More Study vs Average GPA
+}
+
+function Load_Scatter_Plot(SubjectData) {
+    // Weekly AI usage (hours) vs GPA
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
