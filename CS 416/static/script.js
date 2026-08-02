@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function Load_Scene(SubjectData) {
     // var main_chart = document.getElementById("main_chart");
+    const width = 300;
+    const height = 300;
 
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
@@ -69,10 +71,11 @@ function Load_Scene(SubjectData) {
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
-    var arc = d3.arc();
-    var pie_chart = d3.pie();
+    var arc = d3.arc().innerRadius(0).outerRadius(150);
+    var pie_chart = d3.pie().value(function(d) {return d.value; });
     var color_pie = ["blue", "red"];
-    main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", 300).height("height", 300);
+    var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");;
+    
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
 
