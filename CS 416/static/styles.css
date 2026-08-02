@@ -50,14 +50,21 @@ a {
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 10px;
+    
 }
 
-#main_scene div {
+#main_charts {
+    display: flex;
+    flex-direction: row;
+}
+
+#main_charts div {
     border: 2px;
     border-color: rgb(27, 43, 59);
     border-radius: 5px;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
+    flex: 1;
 }
 
 p {

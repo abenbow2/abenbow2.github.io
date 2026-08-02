@@ -63,13 +63,14 @@ function Load_Scene(SubjectData) {
 
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
+    d3.select("#main_scene").append("div").attr("id", "main_charts");
     // SubjectData.CalculateGPADifference();
-    var ai_users_percent = d3.select("#main_scene").append("div");
+    var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
     ai_users_percent.append("h3").html(`${Calculate_AI_Users_Percentage(SubjectData)}% of students use AI more than an hour each week`);
 
-    var ai_vs_studying_pie = d3.select("#main_scene").append("div");
+    var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
 
-    var average_GPA_vs_usage = d3.select("#main_scene").append("div");
+    var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
 
 }
 
