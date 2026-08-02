@@ -53,7 +53,7 @@ var HUMANITIES = new Subject("Humanities", HUM_PreSemesterGPA, HUM_PostSemesterG
 
 document.addEventListener('DOMContentLoaded', function() {
     Load_Scene(STEM);
-    console.log(STEM.GPA_difference[0]);
+    // console.log(STEM.GPA_difference[0]);
 });
 
 
