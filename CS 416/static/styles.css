@@ -35,9 +35,14 @@ h2 {
 
 h3 {
     text-align: left;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 600;
     margin: 0 0 0 0;
+}
+
+h4 {
+    font-size: 36px;
+    font-weight: 600;
 }
 
 a {
@@ -74,7 +79,7 @@ a {
 }
 
 #main_charts div:hover {
-    flex-grow: 3;
+    flex-grow: 2;
     border-style: solid;
     border-width: 4px;
     border-color: rgb(0, 128, 255);
@@ -102,4 +107,9 @@ button {
     margin: 25px;
     font-family: "Merriweather", Georgia, Arial, sans-serif;
     font-weight: 500;
+}
+
+#tooltip {
+    font-size: 18px;
+    color: #b1bdd4;
 }
