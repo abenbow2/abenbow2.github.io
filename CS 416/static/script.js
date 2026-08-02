@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function Load_Scene(SubjectData) {
     // var main_chart = document.getElementById("main_chart");
-    const width = 300;
-    const height = 300;
-    const radius = 130
+    const width = 400;
+    const height = 400;
+    const radius = height / 2;
 
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
@@ -73,7 +73,7 @@ function Load_Scene(SubjectData) {
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
     ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`);
-    var arc = d3.arc().innerRadius(0).outerRadius(150);
+    var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
     var color_pie = ["#053A56", "#C0C0C0"];
 
@@ -81,7 +81,7 @@ function Load_Scene(SubjectData) {
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
     
     // Labels found from https://cagrimmett.com/2016/08/19/d3-pie-chart/
-    var labelArc = d3.arc().outerRadius(radius).innerRadius(radius)
+    var labelArc = d3.arc().outerRadius(radius - 20).innerRadius(radius - 20)
     main_pie_chart_svg.append("text").attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; }).text(function(d) { return d;}).style("fill", "#ffffff");
 
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
