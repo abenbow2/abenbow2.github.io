@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function Load_Scene(SubjectData) {
     // var main_chart = document.getElementById("main_chart");
 
-    d3.select("#main_scene").selectAll("*").remove();
+    d3.select("#main_scene").innerHTML.remove();
     d3.select("#main_scene").append("h2").innerHTML = "AI Usage Among Students in " + SubjectData.name;
     SubjectData.CalculateGPADifference();
 
