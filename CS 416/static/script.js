@@ -28,6 +28,10 @@ var STEM_GPADifference = [];
 var ARTS_GPADifference = [];
 var HUM_GPADifference = [];
 
+document.addEventListener('DOMContentLoaded', function() {
+    CalculateGPADifference(STEM_PreSemesterGPA, STEM_PostSemesterGPA, STEM_GPADifference);
+});
+
 function CalculateGPADifference(presemester_GPA, postsemester_GPA, results) {
     console.log("test");
 }
