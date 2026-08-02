@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+// import * as d3 from "./d3.v7";
 
 // DATA IN THE FORM OF ARRAYS
 // STEM
