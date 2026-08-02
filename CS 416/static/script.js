@@ -72,7 +72,7 @@ function Load_Scene(SubjectData) {
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
     var arc = d3.arc().innerRadius(0).outerRadius(150);
-    var pie_chart = d3.pie().value(function(d) {return d.value; });
+    var pie = d3.pie().value(function(d) {return d.value; });
     var color_pie = ["blue", "red"];
     var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     console.log(MoreAI_vs_MoreStudy(SubjectData));
@@ -108,6 +108,7 @@ function Calculate_AI_Users_Percentage(SubjectData) {
 }
 
 function MoreAI_vs_MoreStudy(SubjectData) {
+    console.log("Calculating...");
     var AI_greater_than_study = [0,0];
 
     for (let i = 0; i < 10000; i++) {
