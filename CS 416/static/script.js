@@ -12,7 +12,7 @@ class Subject {
     CalculateGPADifference() {
         console.log("Running GPA Difference");
 
-        for (let i = 0; index < 10000; index++) {
+        for (let i = 0; i < 10000; i++) {
             this.GPA_difference[i] = this.postsemester_GPA[i] - this.presemester_GPA[i];
         }
     }
