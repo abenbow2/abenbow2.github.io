@@ -81,7 +81,7 @@ function Load_Scene(SubjectData) {
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
     
     // Labels found from https://cagrimmett.com/2016/08/19/d3-pie-chart/
-    var labelArc = d3.arc().outerRadius(radius - 20).innerRadius(radius - 20)
+    var labelArc = d3.arc().outerRadius(radius - 20).innerRadius(radius - 20);
     main_pie_chart_svg.append("text").attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; }).text(function(d) { return d;}).style("fill", "#ffffff");
 
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
