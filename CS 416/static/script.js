@@ -119,8 +119,11 @@ function MoreAI_vs_MoreStudy(SubjectData) {
         }
     }
 
+    console.log("Calculating Complete!");
+
     AI_greater_than_study[0] = Math.trunc((AI_greater_than_study[0] / 10000) * 100);
     AI_greater_than_study[1] = Math.trunc((AI_greater_than_study[1] / 10000) * 100);
     
     return AI_greater_than_study;
+
 }
