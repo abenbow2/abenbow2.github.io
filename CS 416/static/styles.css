@@ -1,6 +1,5 @@
 body {
     background-color: rgb(27, 43, 59);
-    color: azure;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -49,6 +48,11 @@ a {
 #main_scene {
     background-color: aliceblue;
     color: rgb(27, 43, 59);
-    border-radius: 5 px;
-    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+p {
+    color: azure;
+    font-size: 16px;
 }
