@@ -48,4 +48,7 @@ a {
 
 #main_scene {
     background-color: aliceblue;
+    color: rgb(27, 43, 59);
+    border-radius: 5 px;
+    margin-bottom: 10px;
 }
