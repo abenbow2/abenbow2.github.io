@@ -72,7 +72,7 @@ function Load_Scene(SubjectData) {
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
-    ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`);
+    ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
     var color_pie = ["#053A56", "#C0C0C0"];
