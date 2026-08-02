@@ -72,12 +72,15 @@ function Load_Scene(SubjectData) {
 
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
     var arc = d3.arc().innerRadius(0).outerRadius(150);
-    var pie = d3.pie().value(function(d) {return d.value; });
+    var pie = d3.pie();
     var color_pie = ["blue", "red"];
-    var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    console.log(MoreAI_vs_MoreStudy(SubjectData));
-    main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
+    var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+    
+
+    main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
+    console.log("Pie?");
 
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
 
