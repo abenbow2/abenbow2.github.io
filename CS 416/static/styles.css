@@ -1,5 +1,7 @@
 body {
     background-color: rgb(27, 43, 59);
+    color: azure;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @font-face {
@@ -24,8 +26,10 @@ h1 {
 }
 
 h2 {
+    font-family: "Merriweather", Georgia, Arial, sans-serif;
+    color: whitesmoke;
     text-align: left;
-    font-size: 48px;
+    font-size: 64px;
     font-weight: 600;
     padding: 10px;
     margin: 0 0 0 0;
@@ -40,4 +44,8 @@ h3 {
 
 a {
     color: rgb(244, 249, 249);
+}
+
+#main_scene {
+    background-color: aliceblue;
 }
