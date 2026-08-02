@@ -59,9 +59,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function Load_Scene(SubjectData) {
-    document.getElementById("subject_title").innerHTML = "AI Usage Among Students in " SubjectData.name;
-    SubjectData.CalculateGPADifference();
-    var main_chart = document.getElementById("main_chart");
-    d3.select("svg");
+    // var main_chart = document.getElementById("main_chart");
 
+    d3.select("#main_scene").selectAll("*").remove();
+    d3.select("#main_scene").append("h2").innerHTML = "AI Usage Among Students in " + SubjectData.name;
+    SubjectData.CalculateGPADifference();
+
+}
+
+function Calculate_AI_Users_Percentage(SubjectData) {
+    var AI_greater_than_hour = 0;
+
+    for (let i = 0; i < 10000; i++) {
+            if (SubjectData.weekly_AI_time[i] > 1) {
+                AI_greater_than_hour++;
+            }
+        }
+    
+    return Math.trunc((AI_greater_than_hour / 10000) * 100);
 }
