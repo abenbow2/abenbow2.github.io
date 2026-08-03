@@ -178,7 +178,7 @@ function Transition_Slide(change) {
         current_subject = 2;
     }
 
-    if (current_subject > 0) {
+    if (current_subject > 0 && document.querySelector(#back_button) == null) {
         d3.select("#buttons").append("button").html(`Previous Slide`).attr("id", "back_button");
         document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
     } else {
