@@ -50,6 +50,9 @@ var HUM_StudyTime = [8.13, 15.15, 10.84, 10.61, 8.24, 7.46, 10.81, 11.3, 11.84, 
 
 var HUMANITIES = new Subject("the Humanities", HUM_PreSemesterGPA, HUM_PostSemesterGPA, HUM_PrimaryUse, HUM_WeeklyAITime, HUM_StudyTime, HUM_GPADifference);
 
+var current_subject = 0;
+
+var subjects = [STEM, ARTS, HUMANITIES];
 
 document.addEventListener('DOMContentLoaded', function() {
     Load_Scene(STEM);
@@ -120,7 +123,6 @@ function Calculate_AI_Users_Percentage(SubjectData) {
 }
 
 function MoreAI_vs_MoreStudy(SubjectData) {
-    console.log("Calculating...");
     var AI_greater_than_study = [0,0];
 
     for (let i = 0; i < 10000; i++) {
@@ -131,8 +133,6 @@ function MoreAI_vs_MoreStudy(SubjectData) {
         }
     }
 
-    console.log("Calculating Complete!");
-
     AI_greater_than_study[0] = Math.trunc((AI_greater_than_study[0] / 10000) * 100);
     AI_greater_than_study[1] = Math.trunc((AI_greater_than_study[1] / 10000) * 100);
     
@@ -141,8 +141,11 @@ function MoreAI_vs_MoreStudy(SubjectData) {
 }
 
 function Calculate_Average(data) {
-    let sum = 0;
+    console.log("Calculating average...");
+    var sum = 0;
     console.log(data[0]);
+    console.log(data[500]);
+    console.log(data[1000]);
 
     for (let i = 0; i < 10000; i++) {
         sum += data[i];
@@ -152,4 +155,5 @@ function Calculate_Average(data) {
     console.log(Math.round(sum / 1000));
     console.log(Math.round(sum / 1000) / 10.0);
     return Math.round(sum / 1000) / 10.0;
+    console.log("-------------------------------------");
 }
