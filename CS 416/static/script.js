@@ -254,7 +254,7 @@ function Load_Bar_Chart(SubjectData) {
     console.log(maximum);
 
     var bar_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "bar_svg");
-    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
+    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).style("max-width", "620px").append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
     var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]).padding(0.1);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + 850 + ")").call(d3.axisBottom(x));
