@@ -68,10 +68,12 @@ function Load_Scene(SubjectData) {
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
     d3.select("#main_scene").append("div").attr("id", "main_charts");
     
+    // FIRST SECTION
     var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
     ai_users_percent.append("h4").html(`Click on a section to learn more`).attr("id", "tooltip");
 
+    // SECOND SECTION
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
     ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
@@ -80,13 +82,11 @@ function Load_Scene(SubjectData) {
 
     var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
-    
-    console.log("test");
 
-
+    // THIRD SECTION
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
-    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.GPA_difference)}`).attr("fill", "#65C3F6");
+    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.GPA_difference)}`).attr("id", "second_h3");
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -142,9 +142,12 @@ function MoreAI_vs_MoreStudy(SubjectData) {
 
 function Calculate_Average(data) {
     let sum = 0;
+    console.log(data[0]);
+
     for (let i = 0; i < 10000; i++) {
         sum += data[i];
     }
+
     console.log(sum);
     console.log(Math.round(sum / 1000));
     console.log(Math.round(sum / 1000) / 10.0);
