@@ -150,7 +150,7 @@ function Calculate_Average(data) {
     console.log(data[500]);
     console.log(data[1000]);
 
-    for (let i = 0; i < SubjectData.num_students; i++) {
+    for (let i = 0; i < data.length; i++) {
         sum += data[i];
     }
 
