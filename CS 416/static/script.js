@@ -149,6 +149,8 @@ function Load_Pie_Chart(SubjectData) {
         } else if (usage_data[i] >= usage_data[second_max_i]) {
             second_max_i = i;
             second_common = labels[second_max_i];
+        } else if (max_i == max_i && usage_data[i] <= usage_data[max_i]) {
+            second_max_i = i;
         }
     }
 
@@ -194,12 +196,12 @@ function Load_Bar_Chart(SubjectData) {
     const height = 600;
     const margin = 10;
 
-    console.log(Math.max(SubjectData.CalculateGPADifference()));
-    console.log(SubjectData.CalculateGPADifference()[0]);
-    console.log(SubjectData.CalculateGPADifference()[100]);
-    console.log(Math.min(SubjectData.CalculateGPADifference()));
-
     var gpa_difference = SubjectData.CalculateGPADifference();
+
+    console.log(Math.max(gpa_difference));
+    console.log(gpa_difference[0]);
+    console.log(gpa_difference[100]);
+    console.log(Math.min(gpa_difference));
 
     var bar_data_moreAI = [];
     var bar_data_lessAI = [];
