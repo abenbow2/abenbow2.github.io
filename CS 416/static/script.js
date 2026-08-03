@@ -163,6 +163,9 @@ function Load_Pie_Chart(SubjectData) {
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html
     //usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append('text').text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")";  }).style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
+    
+    var text = "    usage_pie_chart_svg.append(\"text\").attr(\"transform\", function(d) { return `translate(${labelArc.centroid(d)})`;}).text(function(d, i) { return labels[i];}).style(\"fill\", \"#fff\").style(\"text-anchor\", \"middle\");";
+    console.log(text[40]);
     usage_pie_chart_svg.append("text").attr("transform", function(d) { return `translate(${labelArc.centroid(d)})`;}).text(function(d, i) { return labels[i];}).style("fill", "#fff").style("text-anchor", "middle");
 
     d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common.toLowerCase()}, followed by ${second_common.toLowerCase()}.`);
