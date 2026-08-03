@@ -246,9 +246,9 @@ function Load_Bar_Chart(SubjectData) {
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
     // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return y(d); }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return height - y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return y(d); }).attr("fill", "#064A6F")
 
-    bar_svg.append("text").attr("x", width).attr("y", height + 40).text("Difference in GPA Over 1 Semester").attr("text-anchor", "start");
+    bar_svg.append("text").attr("x", width / 2).attr("y", height + 40).text("Difference in GPA Over 1 Semester").attr("text-anchor", "middle");
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
