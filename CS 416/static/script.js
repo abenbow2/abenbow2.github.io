@@ -239,8 +239,8 @@ function Load_Bar_Chart(SubjectData) {
     var bar_svg = d3.select("#main_scene").append("div").append("svg").attr("id", "bar_svg");
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
-    var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]).padding(10);
-    bar_svg.append("g").attr("transform", "translate(" + margin + "," + height + ")").call(d3.axisBottom(x));
+    var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]).padding(1);
+    bar_svg.append("g").attr("transform", "translate(" + margin + "," + height + margin + ")").call(d3.axisBottom(x));
 
     var y = d3.scaleLinear().domain([0, 1000]).range([height, 0]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
