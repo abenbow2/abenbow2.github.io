@@ -59,7 +59,6 @@ a {
 }
 
 #ai_usage_pie {
-    flex: 1;
     text-align: center;
     display: flex;
     justify-content: center;
