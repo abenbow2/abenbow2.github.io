@@ -105,6 +105,8 @@ function Load_Pie_Chart(SubjectData) {
     console.log("Loading pie chart...");
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`How Students in ${SubjectData.name} Use AI`);
+    d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
+    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
 }
 
 function Load_Bar_Chart(SubjectData) {
@@ -112,6 +114,8 @@ function Load_Bar_Chart(SubjectData) {
     console.log("Loading bar chart...");
     d3.select("#main_scene").html(null);  
     d3.select("#main_scene").append("h2").html(`GPA of Students Who Spend More Time Using AI or More Time Studying`);
+    d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
+    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
 }
 
 function Load_Scatter_Plot(SubjectData) {
@@ -119,6 +123,8 @@ function Load_Scatter_Plot(SubjectData) {
     console.log("Loading scatter plot...");
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
+    d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
+    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
