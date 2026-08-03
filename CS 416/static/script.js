@@ -194,9 +194,9 @@ function Load_Bar_Chart(SubjectData) {
 
     d3.select("#main_scene").append("h3").html("GPA Progress of Students Who Spent More Time Using AI than Studying");
 
-    const width = 600;
-    const height = 600;
-    const margin = 20;
+    const width = 800;
+    const height = 800;
+    const margin = 50;
 
     var gpa_difference = SubjectData.CalculateGPADifference();
 
@@ -240,13 +240,13 @@ function Load_Bar_Chart(SubjectData) {
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
     var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]);
-    bar_svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
+    bar_svg.append("g").attr("transform", "translate(" + margin + "," + height + ")").call(d3.axisBottom(x));
 
-    var y = d3.scaleLinear().domain([0, 1000]).range([0, height - 40]);
+    var y = d3.scaleLinear().domain([1000, 0]).range([height - margin * 2, 0]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
     // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return height - y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return y(d); }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]) - (x.bandwidth() / 2); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
 
     bar_svg.append("text").attr("x", width / 2).attr("y", height + 40).text("Difference in GPA Over 1 Semester").attr("text-anchor", "middle");
 
