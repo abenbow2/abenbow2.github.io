@@ -168,3 +168,13 @@ button:hover {
 svg {
     padding-left: 25px;
 }
+
+#bar_chart_box {
+    display: flex;
+    flex-direction: row;
+}
+
+#bar_chart_buttons_box {
+    display: flex;
+    flex-direction: column;
+}

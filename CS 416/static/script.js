@@ -277,11 +277,15 @@ function Load_Bar_Chart(SubjectData) {
 }
 
 function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title) {
+    // transition based on https://d3-graph-gallery.com/graph/barplot_button_data_simple.html
     d3.select("#bar_chart_title").html(`GPA Progress of Students Who Spent ${title}`);
     console.log(data);
-    
+
     var domain_values = ["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"];
-    bar_svg.selectAll("rect").data(data).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F");
+
+    var bars = bar_svg.selectAll("rect").data(data)
+
+    bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F");
 }
 
 function Load_Scatter_Plot(SubjectData) {
