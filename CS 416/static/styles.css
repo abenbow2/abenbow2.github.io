@@ -55,18 +55,16 @@ a {
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 10px;
-    display: flex;
-    flex-direction: row;
     
 }
 
-#ai_usage_pie, #pie_common {
+#ai_usage_pie {
     flex: 1;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #main_charts {

@@ -166,7 +166,7 @@ function Load_Pie_Chart(SubjectData) {
         .style("font-size", 18)
         .style("color", "#ffffff");
 
-    d3.select("#main_scene").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common}, followed by ${second_common}.`);
+    d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common}, followed by ${second_common}.`);
 
 
 
