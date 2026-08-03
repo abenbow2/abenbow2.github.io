@@ -234,17 +234,19 @@ function Load_Bar_Chart(SubjectData) {
 
     console.log(bar_data_moreAI);
 
+    var domain_values = ["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"];
+
     var bar_svg = d3.select("#main_scene").append("div").append("svg");
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
-    var x = d3.scaleBand().domain(d => ["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]);
+    var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]);
     bar_svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
 
     var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
     // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(i); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
     console.log(x(bar_data_moreAI[0]));
     console.log(x(0));
     console.log(x(bar_data_moreAI[8]));
