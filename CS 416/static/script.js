@@ -192,11 +192,7 @@ function Load_Bar_Chart(SubjectData) {
     d3.select("#main_scene").html(null);  
     d3.select("#main_scene").append("h2").html(`GPA Improvement vs How Students Spent Their Time`);
 
-    d3.select("#main_scene").append("h3").html("GPA Progress of Students Who Spent More Time Using AI than Studying");
-
-    const width = 800;
-    const height = 800;
-    const margin = 50;
+    d3.select("#main_scene").append("h3").attr("id", "bar_chart_title").html("GPA Progress of Students Who Spent More Time Using AI than Studying");
 
     var gpa_difference = SubjectData.CalculateGPADifference();
 
@@ -228,15 +224,33 @@ function Load_Bar_Chart(SubjectData) {
             }
 
         } else {
-            bar_data_lessAI.push(gpa_difference[i]);
+            if (gpa_difference[i] < -1.5) {
+                bar_data_lessAI[0]++;
+            } else if (gpa_difference[i] < -1) {
+                bar_data_lessAI[1]++;
+            } else if (gpa_difference[i] < -0.5) {
+                bar_data_lessAI[2]++;
+            } else if (gpa_difference[i] <= 0) {
+                bar_data_lessAI[3]++;
+            } else if (gpa_difference[i] < 0.5) {
+                bar_data_lessAI[4]++;
+            } else if (gpa_difference[i] < 1) {
+                bar_data_lessAI[5]++;
+            } else if (gpa_difference[i] < 1.5) {
+                bar_data_lessAI[6]++;
+            } else if (gpa_difference[i] < 2) {
+                bar_data_lessAI[7]++;
+            } else {
+                bar_data_lessAI[8]++;
+            }
         }
     }
 
-    console.log(bar_data_moreAI);
+    const width = 800;
+    const height = 800;
+    const margin = 50;
 
-    var domain_values = ["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"];
-
-    var bar_svg = d3.select("#main_scene").append("div").append("svg").attr("id", "bar_svg");
+    var bar_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "bar_svg");
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
     var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]).padding(0.1);
@@ -245,14 +259,29 @@ function Load_Bar_Chart(SubjectData) {
     var y = d3.scaleLinear().domain([0, 1000]).range([height, 0]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
-    // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
-
     bar_svg.append("text").attr("x", width / 2).attr("y", height + margin * 2).text("Difference in GPA Over 1 Semester").attr("text-anchor", "middle");
     bar_svg.append("text").attr("x", -height / 2).attr("y", 15).text("Number of Students").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
 
+    Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");
+
+    d3.select("#bar_chart_box").append("div").attr("id", "bar_chart_buttons_box");
+    
+    d3.select("#bar_chart_box").append("button").html(`More Time Using AI`).attr("id", "more_ai_button");
+    document.getElementById("more_ai_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");});
+
+    d3.select("#bar_chart_box").append("button").html(`More Time Studying`).attr("id", "more_studying_button");
+    document.getElementById("more_studying_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_lessAI, x, y, width, height, margin, bar_svg, "More Time Studying than Using AI");});
+
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
+}
+
+function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title) {
+    d3.select("#bar_chart_title").html(`GPA Progress of Students Who Spent ${title}`);
+    console.log(data);
+    
+    var domain_values = ["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"];
+    bar_svg.selectAll("rect").data(data).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F");
 }
 
 function Load_Scatter_Plot(SubjectData) {
