@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
     Load_Scene(STEM);
     document.getElementById("transition_button").addEventListener("click",  function() { Transition_Slide(1);});
     document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
+    document.getElementById("back_button").style.backgroundColor("#8E9699");
+    document.getElementById("back_button").style.color("#cbcccd");
 });
 
 
@@ -106,7 +108,43 @@ function Load_Pie_Chart(SubjectData) {
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`How Students in ${SubjectData.name} Use AI`);
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
-    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
+    document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);} );
+
+    const width = 500;
+    const height = 500;
+    const radius = height / 2;
+
+    // Copywriting, Summarizing, Debugging, Ideation, or Direct Answer
+    copywriting_count = 0;
+    summary_count = 0;
+    debugging_count = 0;
+    ideation_count = 0;
+    answer_count = 0;
+    
+    for (let i = 0; i < SubjectData.num_students; i++) {
+        if (SubjectData.primary_use[i] == "Copywriting/Drafting") {
+            copywriting_count++;
+        } else if (SubjectData.primary_use[i] == "Summarizing Reading") {
+            summary_count++;
+        } else if (SubjectData.primary_use[i] == "Debugging/Troubleshooting") {
+            debugging_count++;
+        } else if (SubjectData.primary_use[i] == "Ideation") {
+            ideation_count++;
+        } else if (SubjectData.primary_use[i] == "Direct Answer Generation") {
+            answer_count++;
+        }
+    }
+
+    usage_data = [copywriting_count, summary_count, debugging_count, ideation_count, answer_count];
+
+    var ai_usage_pie = d3.select("#main_charts").append("div").attr("id", "ai_usage_pie");
+    // ai_usage_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
+    var arc = d3.arc().innerRadius(0).outerRadius(radius);
+    var pie = d3.pie();
+    var color_pie = ["#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9"];
+
+    var usage_pie_chart_svg = ai_usage_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 }
 
 function Load_Bar_Chart(SubjectData) {
