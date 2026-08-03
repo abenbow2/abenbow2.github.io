@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
     Load_Scene(STEM);
     document.getElementById("transition_button").addEventListener("click",  function() { Transition_Slide(1);});
     document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
-    document.getElementById("back_button").style.backgroundColor("#8E9699");
-    document.getElementById("back_button").style.color("#cbcccd");
+    document.getElementById("back_button").style.backgroundColor = "#8E9699";
+    document.getElementById("back_button").style.color = "#cbcccd";
 });
 
 
@@ -221,10 +221,10 @@ function Transition_Slide(change) {
     Load_Scene(subjects[current_subject]);
     
     if (current_subject >= 2) {
-        document.getElementById("transition_button").style.backgroundColor("#8E9699");
-        document.getElementById("transition_button").style.color("#cbcccd");
+        document.getElementById("transition_button").style.backgroundColor = "#8E9699";
+        document.getElementById("transition_button").style.color = "#cbcccd";
     } else if (current_subject <= 0) {
-        document.getElementById("back_button").style.backgroundColor("#8E9699");
-        document.getElementById("back_button").style.color("#cbcccd");
+        document.getElementById("back_button").style.backgroundColor = "#8E9699";
+        document.getElementById("back_button").style.color = "#cbcccd";
     }
 }
