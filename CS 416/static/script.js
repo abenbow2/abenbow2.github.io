@@ -155,8 +155,8 @@ function Calculate_Average(data) {
     }
 
     console.log(sum);
-    console.log(Math.round(sum / (SubjectData.num_students / 10)));
-    console.log(Math.round(sum / (SubjectData.num_students / 10)) / 10.0);
-    return Math.round(sum / (SubjectData.num_students / 10)) / 10.0;
+    console.log(Math.round(sum / (data.length / 10)));
+    console.log(Math.round(sum / (data.length / 10)) / 10.0);
+    return Math.round(sum / (data.length / 10)) / 10.0;
     console.log("-------------------------------------");
 }
