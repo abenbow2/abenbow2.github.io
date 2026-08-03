@@ -178,3 +178,7 @@ svg {
     display: flex;
     flex-direction: column;
 }
+
+.short {
+    max-width: 200px;
+}
