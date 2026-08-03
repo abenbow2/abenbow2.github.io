@@ -71,27 +71,26 @@ a {
     border-radius: 5px;
     margin: 5px;
     padding: 15px;
-    flex: 1;
+    flex: 3;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #main_charts div:hover {
-    flex-grow: 2;
+    flex-grow: 4;
     border-style: solid;
     border-width: 4px;
     border-color: rgb(0, 128, 255);
+    
 }
 
 #main_charts h3, #main_charts h4 {
     text-align: center;
 }
 
-#ai_vs_studying {
-    flex-direction: column;
-}
 
 p {
     color: azure;

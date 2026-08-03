@@ -67,7 +67,7 @@ function Load_Scene(SubjectData) {
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
     d3.select("#main_scene").append("div").attr("id", "main_charts");
-    // SubjectData.CalculateGPADifference();
+    
     var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
     ai_users_percent.append("h4").html(`Click on a section to learn more`).attr("id", "tooltip");
@@ -96,7 +96,7 @@ function Load_Pie_Chart(SubjectData) {
 
 function Load_Bar_Chart(SubjectData) {
     // More AI vs More Study vs Average GPA
-    d3.select("#main_scene").html(null);
+    d3.select("#main_scene").html(null);  
     d3.select("#main_scene").append("h2").html(`GPA of Students Who Spend More Time Using AI or More Time Studying`);
 }
 
