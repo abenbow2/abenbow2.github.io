@@ -145,6 +145,10 @@ button:hover {
     display: inline;
 }
 
+#pie_key {
+    flex: 0.5;
+}
+
 #pie_key p {
     font-size: 18px;
     text-align: left;

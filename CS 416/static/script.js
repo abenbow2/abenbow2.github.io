@@ -166,7 +166,7 @@ function Load_Pie_Chart(SubjectData) {
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html
     // usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("text").text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return `translate(${arc.centroid(d)})`;}).style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
-    d3.select("#ai_usage_pie").append("div").append("p").attr("id", "pie_key");
+    d3.select("#ai_usage_pie").append("div").attr("id", "pie_key");
 
     var pkey; 
 
@@ -247,7 +247,7 @@ function Load_Bar_Chart(SubjectData) {
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
     // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(i); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x((i * 4) / 9 - 2); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
     
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
