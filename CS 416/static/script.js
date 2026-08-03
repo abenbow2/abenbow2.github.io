@@ -75,12 +75,14 @@ function Load_Scene(SubjectData) {
     d3.select("#main_scene").append("div").attr("id", "main_charts");
     
     // FIRST SECTION
-    var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent").addEventListener("click", Load_Pie_Chart(SubjectData));
+    var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
+    document.getElementById("ai_users_percent").addEventListener("click", Load_Pie_Chart(SubjectData));
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
     ai_users_percent.append("h4").html(`Click on a section to learn more`).attr("id", "tooltip");
 
     // SECOND SECTION
-    var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying").addEventListener("click", Load_Bar_Chart(SubjectData));
+    var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
+    document.getElementById("ai_vs_studying").addEventListener("click", Load_Bar_Chart(SubjectData));
     ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
@@ -90,25 +92,29 @@ function Load_Scene(SubjectData) {
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
     // THIRD SECTION
-    var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison").addEventListener("click", Load_Scatter_Plot(SubjectData));
+    var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
+    document.getElementById("average_comparison").addEventListener("click", Load_Scatter_Plot(SubjectData));
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
     average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
 }
 
 function Load_Pie_Chart(SubjectData) {
     // AI Primary usage
+    console.log("Loading pie chart...");
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`How Students in ${SubjectData.name} Use AI`);
 }
 
 function Load_Bar_Chart(SubjectData) {
     // More AI vs More Study vs Average GPA
+    console.log("Loading bar chart...");
     d3.select("#main_scene").html(null);  
     d3.select("#main_scene").append("h2").html(`GPA of Students Who Spend More Time Using AI or More Time Studying`);
 }
 
 function Load_Scatter_Plot(SubjectData) {
     // Weekly AI usage (hours) vs GPA
+    console.log("Loading scatter plot...");
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
 }
