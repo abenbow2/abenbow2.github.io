@@ -162,7 +162,7 @@ function Load_Pie_Chart(SubjectData) {
     usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html
-    usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append('text').text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return `translate(${labelArc.centroid(d)})`;}) ; //.style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
+    usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("text").text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return `translate(${arc.centroid(d)})`;}).style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
     
     // var text = "    usage_pie_chart_svg.append(\"text\").attr(\"transform\", function(d) { return `translate(${labelArc.centroid(d)})`;}).text(function(d, i) { return labels[i];}).style(\"fill\", \"#fff\").style(\"text-anchor\", \"middle\");";
     // console.log(text[40]);
