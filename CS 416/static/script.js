@@ -145,5 +145,8 @@ function Calculate_Average(data) {
     for (let i = 0; i < 10000; i++) {
         sum += data[i];
     }
+    console.log(sum);
+    console.log(Math.round(sum / 1000));
+    console.log(Math.round(sum / 1000) / 10.0);
     return Math.round(sum / 1000) / 10.0;
 }
