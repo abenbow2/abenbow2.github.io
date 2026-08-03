@@ -6,7 +6,7 @@ class Subject {
         this.primary_use = primary_use;
         this.weekly_AI_time = weekly_AI_time;
         this.study_time = study_time;
-        this.GPA_difference = postsemester_GPA;
+        this.GPA_difference = GPA_difference;
         this.num_students = presemester_GPA.length;
     }
 
