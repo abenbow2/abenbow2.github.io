@@ -115,11 +115,11 @@ function Load_Pie_Chart(SubjectData) {
     const radius = height / 2;
 
     // Copywriting, Summarizing, Debugging, Ideation, or Direct Answer
-    copywriting_count = 0;
-    summary_count = 0;
-    debugging_count = 0;
-    ideation_count = 0;
-    answer_count = 0;
+    var copywriting_count = 0;
+    var summary_count = 0;
+    var debugging_count = 0;
+    var ideation_count = 0;
+    var answer_count = 0;
     
     for (let i = 0; i < SubjectData.num_students; i++) {
         if (SubjectData.primary_use[i] == "Copywriting/Drafting") {
@@ -135,7 +135,9 @@ function Load_Pie_Chart(SubjectData) {
         }
     }
 
-    usage_data = [copywriting_count, summary_count, debugging_count, ideation_count, answer_count];
+    var usage_data = [copywriting_count, summary_count, debugging_count, ideation_count, answer_count];
+    var most_common = "";
+    var second_common = "";
 
     var ai_usage_pie = d3.select("#main_charts").append("div").attr("id", "ai_usage_pie");
     // ai_usage_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
@@ -145,6 +147,8 @@ function Load_Pie_Chart(SubjectData) {
 
     var usage_pie_chart_svg = ai_usage_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
+
+    d3.select("#main_scene").append("div").append("h4").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common}, followed by ${second_common}.`);
 }
 
 function Load_Bar_Chart(SubjectData) {
