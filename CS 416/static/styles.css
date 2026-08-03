@@ -177,10 +177,18 @@ svg {
 #bar_chart_buttons_box {
     display: flex;
     flex-direction: column;
+    padding: 20px;
 }
 
 .short_button {
-    max-width: 400px;
+    max-width: 480px;
     background-color: #39B2F3;
     color: aliceblue;
+}
+
+#bar_chart_title {
+    text-align: center;
+    max-width: 80%;
+    max-height: fit-content;
+    font-size: 42px;
 }
