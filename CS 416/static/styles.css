@@ -91,6 +91,9 @@ a {
     text-align: center;
 }
 
+#main_charts div h3:hover {
+    font-size: 52px;
+}
 
 p {
     color: azure;
@@ -102,10 +105,17 @@ button {
     font-size: 36px;
     padding: 15px;
     border-radius: 5px;
+    color: rgb(27, 43, 59);
     border-color: rgb(27, 43, 59);
     margin: 25px;
     font-family: "Merriweather", Georgia, Arial, sans-serif;
     font-weight: 500;
+}
+
+button:hover {
+    background-color: rgb(75, 116, 143);
+    border-radius: 8px;
+    color: azure;
 }
 
 #tooltip {

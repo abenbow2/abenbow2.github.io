@@ -85,7 +85,8 @@ function Load_Scene(SubjectData) {
 
 
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
-
+    average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
+    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.GPA_difference)}`).attr("fill", "#65C3F6");
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -137,4 +138,12 @@ function MoreAI_vs_MoreStudy(SubjectData) {
     
     return AI_greater_than_study;
 
+}
+
+function Calculate_Average(data) {
+    let sum = 0;
+    for (let i = 0; i < 10000; i++) {
+        sum += data[i];
+    }
+    return Math.round(sum / 1000) / 10.0;
 }
