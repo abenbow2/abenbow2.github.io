@@ -13,6 +13,7 @@ class Subject {
     CalculateGPADifference() {
 
         for (let i = 0; i < this.num_students; i++) {
+            this.GPA_difference[i] = 0;
             this.GPA_difference[i] = this.postsemester_GPA[i] - this.presemester_GPA[i];
         }
 
@@ -198,17 +199,29 @@ function Load_Bar_Chart(SubjectData) {
     console.log(SubjectData.CalculateGPADifference()[100]);
     console.log(Math.min(SubjectData.CalculateGPADifference()));
 
-    var bar_data_moreAI = [1, 2, 3];
+    var gpa_difference = SubjectData.CalculateGPADifference();
+
+    var bar_data_moreAI = [];
+    var bar_data_lessAI = [];
+
+    for (let i = 0; i < SubjectData.num_students; i++) {
+        if (SubjectData.weekly_AI_time[i] > SubjectData.study_time[i]) {
+            bar_data_moreAI.push(gpa_difference[i]);
+        } else {
+            bar_data_lessAI.push(gpa_difference[i]);
+        }
+    }
 
     var bar_svg = d3.select("#main_scene").append("div").append("svg");
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
-    var x = d3.scaleBand().domain([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]).range([0, width]);
+    var x = d3.scaleBand().domain([-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]).range([0, width]);
     bar_svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
 
     var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
+    // MORE AI
     bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return i; }).attr("y", function(d) { return d; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - d; }).attr("fill", "#064A6F")
     
 
