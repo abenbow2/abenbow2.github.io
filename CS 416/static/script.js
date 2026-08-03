@@ -58,6 +58,7 @@ var current_subject = 0;
 var subjects = [STEM, ARTS, HUMANITIES];
 
 document.addEventListener('DOMContentLoaded', function() {
+    current_subject = 0;
     Load_Scene(STEM);
     
 });
@@ -96,6 +97,8 @@ function Load_Scene(SubjectData) {
     document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
     average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
+
+    document.getElementById("transition_button").addEventListener("click", Transition_Slide);
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -156,21 +159,13 @@ function MoreAI_vs_MoreStudy(SubjectData) {
 }
 
 function Calculate_Average(data) {
-    console.log("Calculating average...");
     var sum = 0;
-    console.log(data[0]);
-    console.log(data[500]);
-    console.log(data[1000]);
 
     for (let i = 0; i < data.length; i++) {
         sum += data[i];
     }
 
-    console.log(sum);
-    console.log(Math.round(sum / (data.length / 10)));
-    console.log(Math.round(sum / (data.length / 10)) / 10.0);
     return Math.round(sum / (data.length / 10)) / 10.0;
-    console.log("-------------------------------------");
 }
 
 function Transition_Slide() {
