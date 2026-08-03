@@ -243,6 +243,11 @@ function Load_Bar_Chart(SubjectData) {
     var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
+    console.log(x(bar_data_moreAI[0]));
+    console.log(x(0));
+    console.log(x(bar_data_moreAI[8]));
+    console.log(x(2));
+
     // MORE AI
     bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(i); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
     
