@@ -203,12 +203,33 @@ function Load_Bar_Chart(SubjectData) {
     console.log(gpa_difference[100]);
     console.log(Math.min(gpa_difference));
 
-    var bar_data_moreAI = [];
-    var bar_data_lessAI = [];
+    // -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2
+    var bar_data_moreAI = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var bar_data_lessAI = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     for (let i = 0; i < SubjectData.num_students; i++) {
         if (SubjectData.weekly_AI_time[i] > SubjectData.study_time[i]) {
-            bar_data_moreAI.push(gpa_difference[i]);
+            // bar_data_moreAI.push(gpa_difference[i]);
+            if (gpa_difference < -1.5) {
+                bar_data_moreAI[0]++;
+            } else if (gpa_difference < -1) {
+                bar_data_moreAI[1]++;
+            } else if (gpa_difference < -0.5) {
+                bar_data_moreAI[2]++;
+            } else if (gpa_difference <= 0) {
+                bar_data_moreAI[3]++;
+            } else if (gpa_difference < 0.5) {
+                bar_data_moreAI[4]++;
+            } else if (gpa_difference < 1) {
+                bar_data_moreAI[5]++;
+            } else if (gpa_difference < 1.5) {
+                bar_data_moreAI[6]++;
+            } else if (gpa_difference < 2) {
+                bar_data_moreAI[7]++;
+            } else {
+                bar_data_moreAI[8]++;
+            }
+
         } else {
             bar_data_lessAI.push(gpa_difference[i]);
         }
