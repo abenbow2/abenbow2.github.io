@@ -192,16 +192,13 @@ function Load_Bar_Chart(SubjectData) {
     d3.select("#main_scene").html(null);  
     d3.select("#main_scene").append("h2").html(`GPA Improvement vs How Students Spent Their Time`);
 
+    d3.select("#main_scene").append("h3").html("GPA Progress of Students Who Spent More Time on AI than Studying");
+
     const width = 600;
     const height = 600;
     const margin = 10;
 
     var gpa_difference = SubjectData.CalculateGPADifference();
-
-    console.log(Math.max(gpa_difference));
-    console.log(gpa_difference[0]);
-    console.log(gpa_difference[100]);
-    console.log(Math.min(gpa_difference));
 
     // -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2
     var bar_data_moreAI = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -249,6 +246,7 @@ function Load_Bar_Chart(SubjectData) {
     // MORE AI
     bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x((i * 4) / 9 - 2); }).attr("y", function(d, i) { return y(d); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
     
+    bar_svg.append("text").attr("x", width).attr("y", height - 10).text("Difference in GPA Over 1 Semester");
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
