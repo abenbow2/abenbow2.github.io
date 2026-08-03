@@ -55,7 +55,18 @@ a {
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
     
+}
+
+#main_scene div {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #main_charts {
