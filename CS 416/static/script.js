@@ -210,21 +210,21 @@ function Load_Bar_Chart(SubjectData) {
     for (let i = 0; i < SubjectData.num_students; i++) {
         if (SubjectData.weekly_AI_time[i] > SubjectData.study_time[i]) {
             // bar_data_moreAI.push(gpa_difference[i]);
-            if (gpa_difference < -1.5) {
+            if (gpa_difference[i] < -1.5) {
                 bar_data_moreAI[0]++;
-            } else if (gpa_difference < -1) {
+            } else if (gpa_difference[i] < -1) {
                 bar_data_moreAI[1]++;
-            } else if (gpa_difference < -0.5) {
+            } else if (gpa_difference[i] < -0.5) {
                 bar_data_moreAI[2]++;
-            } else if (gpa_difference <= 0) {
+            } else if (gpa_difference[i] <= 0) {
                 bar_data_moreAI[3]++;
-            } else if (gpa_difference < 0.5) {
+            } else if (gpa_difference[i] < 0.5) {
                 bar_data_moreAI[4]++;
-            } else if (gpa_difference < 1) {
+            } else if (gpa_difference[i] < 1) {
                 bar_data_moreAI[5]++;
-            } else if (gpa_difference < 1.5) {
+            } else if (gpa_difference[i] < 1.5) {
                 bar_data_moreAI[6]++;
-            } else if (gpa_difference < 2) {
+            } else if (gpa_difference[i] < 2) {
                 bar_data_moreAI[7]++;
             } else {
                 bar_data_moreAI[8]++;
