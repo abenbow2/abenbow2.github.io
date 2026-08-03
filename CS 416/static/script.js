@@ -60,7 +60,7 @@ var subjects = [STEM, ARTS, HUMANITIES];
 document.addEventListener('DOMContentLoaded', function() {
     current_subject = 0;
     Load_Scene(STEM);
-    
+    document.getElementById("transition_button").addEventListener("click",  function() { Transition_Slide(1);});
 });
 
 
@@ -97,8 +97,6 @@ function Load_Scene(SubjectData) {
     document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
     average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
-
-    document.getElementById("transition_button").addEventListener("click", Transition_Slide);
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -168,10 +166,27 @@ function Calculate_Average(data) {
     return Math.round(sum / (data.length / 10)) / 10.0;
 }
 
-function Transition_Slide() {
-    current_subject++;
+function Transition_Slide(change) {
+    current_subject += change;
+
     if (current_subject <= 2) {
         Load_Scene(subjects[current_subject]);
+    } else if (current_subject < 0) {
+        current_subject = 0;
+    }
+    else {
+        current_subject = 2;
+    }
+
+    if (current_subject > 0) {
+        d3.select("#main_scene").append("button").html(`Previous Slide`).attr("id", "back_button");
+        document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
+    } else {
+        d3.select("#back_button").remove();
     }
     
+    if (current_subject == 2) {
+        document.getElementById("transition_button").style.backgroundColor("#8E9699");
+        document.getElementById("transition_button").style.color("#cbcccd");
+    }
 }
