@@ -169,7 +169,7 @@ function Load_Pie_Chart(SubjectData) {
 
     for (let i = 0; i < 5; i++) {
         pkey = d3.select("#pie_key").append("p").html(`${labels[i]} <br>`);
-        pkey.style("fill", color_pie[i]);
+        pkey.style("color", color_pie[i]);
     }
 
 
@@ -209,7 +209,7 @@ function Load_Bar_Chart(SubjectData) {
     var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
-    bar_svg.selectAll("rect").data(bar_data_more_AI).enter().append("rect").attr("x", function(d, i) { return i; }).attr("y", function(d) { return d; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - d; }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return i; }).attr("y", function(d) { return d; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - d; }).attr("fill", "#064A6F")
     
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
