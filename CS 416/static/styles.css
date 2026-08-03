@@ -112,6 +112,7 @@ button:hover {
     background-color: rgb(75, 116, 143);
     border-radius: 8px;
     color: azure;
+    box-shadow: 0 4px 8px 0 rgba(8, 10, 16, 0.6);
 }
 
 #tooltip {
