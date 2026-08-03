@@ -11,7 +11,6 @@ class Subject {
     }
 
     CalculateGPADifference() {
-        console.log("Running GPA Difference");
 
         for (let i = 0; i < this.num_students; i++) {
             this.GPA_difference[i] = this.postsemester_GPA[i] - this.presemester_GPA[i];
@@ -134,8 +133,24 @@ function Load_Pie_Chart(SubjectData) {
     }
 
     var usage_data = [copywriting_count, summary_count, debugging_count, ideation_count, answer_count];
+    var labels = ["Copywriting", "Summarization", "Debugging", "Ideation", "Generating Answers"];
+    var max_i = 0;
+    var second_max_i = 0;
     var most_common = "";
     var second_common = "";
+
+    for (let i = 0; i < 5; i++) {
+        if (usage_data[i] >= usage_data[max_i]) {
+            second_max_i = max_i;
+            max_i = i;
+            most_common = labels[i];
+            second_common = labels[second_max_i];
+        } else if (usage_data[i] >= usage_data[second_max_i]) {
+            second_max_i = i;
+            second_common = labels[second_max_i];
+        }
+    }
+
 
     var ai_usage_pie = d3.select("#main_scene").append("div").attr("id", "ai_usage_pie");
     // ai_usage_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
