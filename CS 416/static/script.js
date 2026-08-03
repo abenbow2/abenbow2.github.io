@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     current_subject = 0;
     Load_Scene(STEM);
     document.getElementById("transition_button").addEventListener("click",  function() { Transition_Slide(1);});
+    document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
 });
 
 
@@ -176,16 +177,12 @@ function Transition_Slide(change) {
     }
 
     Load_Scene(subjects[current_subject]);
-
-    if (current_subject > 0 && document.querySelector("#back_button") == null) {
-        d3.select("#buttons").append("button").html(`Previous Slide`).attr("id", "back_button");
-        document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
-    } else {
-        d3.select("#back_button").remove();
-    }
     
-    if (current_subject == 2) {
+    if (current_subject >= 2) {
         document.getElementById("transition_button").style.backgroundColor("#8E9699");
         document.getElementById("transition_button").style.color("#cbcccd");
+    } else if (current_subject <= 0) {
+        document.getElementById("back_button").style.backgroundColor("#8E9699");
+        document.getElementById("back_button").style.color("#cbcccd");
     }
 }
