@@ -153,7 +153,6 @@ function Load_Pie_Chart(SubjectData) {
 
 
     var ai_usage_pie = d3.select("#main_scene").append("div").attr("id", "ai_usage_pie");
-    // ai_usage_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
     var color_pie = ["#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9"];
@@ -167,7 +166,7 @@ function Load_Pie_Chart(SubjectData) {
         .style("font-size", 18)
         .style("color", "#ffffff");
 
-    d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common}, followed by ${second_common}.`);
+    d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common.toLowerCase()}, followed by ${second_common.toLowerCase()}.`);
 
 
 

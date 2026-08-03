@@ -66,6 +66,14 @@ a {
     flex-direction: row;
 }
 
+#ai_usage_pie div {
+    flex: 1
+}
+
+#ai_usage_pie svg {
+    flex: 1
+}
+
 #main_charts {
     display: flex;
     flex-direction: row;
