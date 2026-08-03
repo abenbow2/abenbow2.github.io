@@ -193,9 +193,15 @@ function Load_Bar_Chart(SubjectData) {
     console.log(Math.max(SubjectData.CalculateGPADifference()));
     console.log(Math.min(SubjectData.CalculateGPADifference()));
 
-    var x = d3.scaleBand().domain([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]).range([0, width]);
-    var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
     var bar_svg = d3.select("#main_scene").append("div").append("svg");
+    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
+
+    var x = d3.scaleBand().domain([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]).range([0, width]);
+    bar_svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
+
+    var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
+    bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
+    
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
