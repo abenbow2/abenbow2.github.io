@@ -147,6 +147,7 @@ button:hover {
 
 #pie_key {
     max-width: 200px;
+    margin-left: -20px;
 }
 
 #pie_key p {
