@@ -246,7 +246,7 @@ function Load_Bar_Chart(SubjectData) {
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
     // MORE AI
-    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]) + (x.bandwidth() / 2); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
+    bar_svg.selectAll("rect").data(bar_data_moreAI).enter().append("rect").attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F")
 
     bar_svg.append("text").attr("x", width / 2).attr("y", height + margin * 2).text("Difference in GPA Over 1 Semester").attr("text-anchor", "middle");
     bar_svg.append("text").attr("x", -height / 2).attr("y", 15).text("Number of Students").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
