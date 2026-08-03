@@ -76,13 +76,13 @@ function Load_Scene(SubjectData) {
     
     // FIRST SECTION
     var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
-    document.getElementById("ai_users_percent").addEventListener("click", () => Load_Pie_Chart(SubjectData));
+    document.getElementById("ai_users_percent").addEventListener("click", function() { Load_Pie_Chart(SubjectData); });
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
     ai_users_percent.append("h4").html(`Click on a section to learn more`).attr("id", "tooltip");
 
     // SECOND SECTION
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
-    document.getElementById("ai_vs_studying").addEventListener("click", () => Load_Bar_Chart(SubjectData));
+    document.getElementById("ai_vs_studying").addEventListener("click", function() { Load_Bar_Chart(SubjectData); });
     ai_vs_studying_pie.append("h4").html(`<strong>${MoreAI_vs_MoreStudy(SubjectData)[0]}%</strong> of students spend more time using AI than studying without AI`).append("br");
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
@@ -93,11 +93,9 @@ function Load_Scene(SubjectData) {
 
     // THIRD SECTION
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
-    document.getElementById("average_comparison").addEventListener("click", () => Load_Scatter_Plot(SubjectData));
+    document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
     average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
-
-    document.getElementById("ai_users_percent").addEventListener("click", Load_Pie_Chart(SubjectData));
 }
 
 function Load_Pie_Chart(SubjectData) {
