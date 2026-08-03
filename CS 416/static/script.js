@@ -169,16 +169,15 @@ function Calculate_Average(data) {
 function Transition_Slide(change) {
     current_subject += change;
 
-    if (current_subject <= 2) {
-        Load_Scene(subjects[current_subject]);
-    } else if (current_subject < 0) {
+    if (current_subject < 0) {
         current_subject = 0;
-    }
-    else {
+    } else if (current_subject > 2) {
         current_subject = 2;
     }
 
-    if (current_subject > 0 && document.querySelector(#back_button) == null) {
+    Load_Scene(subjects[current_subject]);
+
+    if (current_subject > 0 && document.querySelector("#back_button") == null) {
         d3.select("#buttons").append("button").html(`Previous Slide`).attr("id", "back_button");
         document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
     } else {
