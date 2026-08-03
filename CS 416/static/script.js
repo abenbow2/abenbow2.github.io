@@ -179,7 +179,7 @@ function Transition_Slide(change) {
     }
 
     if (current_subject > 0) {
-        d3.select("#main_scene").append("button").html(`Previous Slide`).attr("id", "back_button");
+        d3.select("#buttons").append("button").html(`Previous Slide`).attr("id", "back_button");
         document.getElementById("back_button").addEventListener("click", function() { Transition_Slide(-1);});
     } else {
         d3.select("#back_button").remove();
