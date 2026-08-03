@@ -161,7 +161,7 @@ function Load_Pie_Chart(SubjectData) {
     var pie = d3.pie();
     var color_pie = ["#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9"];
 
-    var usage_pie_chart_svg = ai_usage_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    var usage_pie_chart_svg = ai_usage_pie.append("div").attr("id", "pie_chart_box").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html

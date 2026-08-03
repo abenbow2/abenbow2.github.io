@@ -70,6 +70,11 @@ a {
     flex: 1
 }
 
+#pie_chart_box {
+    min-width: fit-content;
+    max-width: 620px;
+}
+
 #ai_usage_pie svg {
     flex: 1
 }
