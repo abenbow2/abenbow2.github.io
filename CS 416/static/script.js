@@ -107,9 +107,7 @@ function Load_Pie_Chart(SubjectData) {
     console.log("Loading pie chart...");
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`How Students in ${SubjectData.name} Use AI`);
-    d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
-    document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);} );
-
+    
     const width = 500;
     const height = 500;
     const radius = height / 2;
@@ -149,6 +147,10 @@ function Load_Pie_Chart(SubjectData) {
     usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
     d3.select("#main_scene").append("div").append("h4").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common}, followed by ${second_common}.`);
+
+    d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
+    document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);} );
+
 }
 
 function Load_Bar_Chart(SubjectData) {
@@ -223,8 +225,20 @@ function Transition_Slide(change) {
     if (current_subject >= 2) {
         document.getElementById("transition_button").style.backgroundColor = "#8E9699";
         document.getElementById("transition_button").style.color = "#cbcccd";
+
+        document.getElementById("back_button").style.backgroundColor = "azure";
+        document.getElementById("back_button").style.color = "rgb(27, 43, 59)";
     } else if (current_subject <= 0) {
         document.getElementById("back_button").style.backgroundColor = "#8E9699";
         document.getElementById("back_button").style.color = "#cbcccd";
+
+        document.getElementById("transition_button").style.backgroundColor = "azure";
+        document.getElementById("transition_button").style.color = "rgb(27, 43, 59)";
+    } else {
+        document.getElementById("transition_button").style.backgroundColor = "azure";
+        document.getElementById("transition_button").style.color = "rgb(27, 43, 59)";
+
+        document.getElementById("back_button").style.backgroundColor = "azure";
+        document.getElementById("back_button").style.color = "rgb(27, 43, 59)";
     }
 }
