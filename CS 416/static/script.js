@@ -175,15 +175,22 @@ function Load_Pie_Chart(SubjectData) {
 }
 
 function Load_Bar_Chart(SubjectData) {
-    // More AI vs More Study vs Average GPA
+    // More AI vs More Study vs GPA Difference
     console.log("Loading bar chart...");
     d3.select("#main_scene").html(null);  
-    d3.select("#main_scene").append("h2").html(`GPA of Students Who Spend More Time Using AI or More Time Studying`);
+    d3.select("#main_scene").append("h2").html(`GPA Improvement vs How Students Spent Their Time`);
 
+    const width = 600;
+    const height = 600;
 
+    console.log(Math.max(SubjectData.CalculateGPADifference()));
+    console.log(Math.min(SubjectData.CalculateGPADifference()));
+
+    var x = d3.scaleBand().domain(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4).range([0, width]);
+    var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
-    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
+    document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
 }
 
 function Load_Scatter_Plot(SubjectData) {
@@ -192,7 +199,7 @@ function Load_Scatter_Plot(SubjectData) {
     d3.select("#main_scene").html(null);
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
-    document.getElementById("return_button").addEventListener("click", () => Load_Scene(subjects[current_subject]));
+    document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
