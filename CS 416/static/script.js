@@ -165,8 +165,11 @@ function Load_Pie_Chart(SubjectData) {
     // usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("text").text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return `translate(${arc.centroid(d)})`;}).style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
     d3.select("#ai_usage_pie").append("div").append("p").attr("id", "pie_key");
 
+    var pkey; 
+
     for (let i = 0; i < 5; i++) {
-        d3.select("#pie_key").append("p").attr("fill", color_pie[i]).html(`${labels[i]} <br>`);
+        pkey = d3.select("#pie_key").append("p").html(`${labels[i]} <br>`);
+        pkey.style("fill", color_pie[i]);
     }
 
 
@@ -191,6 +194,8 @@ function Load_Bar_Chart(SubjectData) {
     const margin = 10;
 
     console.log(Math.max(SubjectData.CalculateGPADifference()));
+    console.log(SubjectData.CalculateGPADifference()[0]);
+    console.log(SubjectData.CalculateGPADifference()[100]);
     console.log(Math.min(SubjectData.CalculateGPADifference()));
 
     var bar_svg = d3.select("#main_scene").append("div").append("svg");
