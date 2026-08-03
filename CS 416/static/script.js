@@ -163,13 +163,15 @@ function Load_Pie_Chart(SubjectData) {
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html
     // usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("text").text(function(d, i){ return labels[i]; }).attr("transform", function(d) { return `translate(${arc.centroid(d)})`;}).style("text-anchor", "middle").style("font-size", 18).style("color", "#ffffff");
-
-    d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common.toLowerCase()}, followed by ${second_common.toLowerCase()}.`);
     d3.select("#ai_usage_pie").append("div").append("p").attr("id", "pie_key");
 
     for (let i = 0; i < 5; i++) {
-        d3.select("#pie_key").append("p").html(`${labels[i]} <br>`).style.color(`${color_pie[i]}`);
+        d3.select("#pie_key").append("p").attr("fill", color_pie[i]).html(`${labels[i]} <br>`);
     }
+
+
+    d3.select("#ai_usage_pie").append("div").append("h4").attr("id", "pie_common").html(`Students in ${SubjectData.name} most commonly use AI for ${most_common.toLowerCase()}, followed by ${second_common.toLowerCase()}.`);
+    
     
 
 
@@ -186,12 +188,14 @@ function Load_Bar_Chart(SubjectData) {
 
     const width = 600;
     const height = 600;
+    const margin = 10;
 
     console.log(Math.max(SubjectData.CalculateGPADifference()));
     console.log(Math.min(SubjectData.CalculateGPADifference()));
 
     var x = d3.scaleBand().domain([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]).range([0, width]);
     var y = d3.scaleLinear().domain([0, 1000]).range([0, height]);
+    var bar_svg = d3.select("#main_scene").append("div").append("svg");
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
