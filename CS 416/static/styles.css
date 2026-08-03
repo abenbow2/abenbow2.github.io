@@ -60,7 +60,7 @@ a {
     
 }
 
-#main_scene div {
+#ai_usage_pie, #pie_common {
     flex: 1;
     text-align: center;
     display: flex;
