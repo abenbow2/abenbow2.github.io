@@ -146,14 +146,19 @@ button:hover {
 }
 
 #pie_key {
-    flex: 0.5;
+    max-width: 200px;
 }
 
 #pie_key p {
     font-size: 18px;
     text-align: left;
+    max-width: 200px;
 }
 
 #citation {
     color: azure;
+}
+
+#bar_svg {
+    padding: 10px;
 }
