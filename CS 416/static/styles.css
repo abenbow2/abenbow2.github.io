@@ -163,3 +163,7 @@ button:hover {
     padding: 10px;
     margin-left: 50px;
 }
+
+svg {
+    padding-left: 25px;
+}
