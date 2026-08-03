@@ -250,7 +250,7 @@ function Load_Bar_Chart(SubjectData) {
     const height = 800;
     const margin = 50;
 
-    var maximum = Math.ceil((Math.max(Math.max(bar_data_lessAI), Math.max(bar_data_moreAI))) / 50) * 50;
+    var maximum = Math.ceil((Math.max(Math.max(...bar_data_lessAI), Math.max(...bar_data_moreAI))) / 50) * 50;
     console.log(maximum);
 
     var bar_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "bar_svg");
