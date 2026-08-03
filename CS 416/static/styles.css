@@ -84,15 +84,11 @@ a {
     border-style: solid;
     border-width: 4px;
     border-color: rgb(0, 128, 255);
-    
+    font-size: 52px;
 }
 
 #main_charts h3, #main_charts h4 {
     text-align: center;
-}
-
-#main_charts div h3:hover {
-    font-size: 52px;
 }
 
 p {
@@ -108,8 +104,8 @@ button {
     color: rgb(27, 43, 59);
     border-color: rgb(27, 43, 59);
     margin: 25px;
-    font-family: "Merriweather", Georgia, Arial, sans-serif;
-    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
 }
 
 button:hover {
@@ -119,10 +115,12 @@ button:hover {
 }
 
 #tooltip {
-    font-size: 18px;
+    font-size: 24px;
     color: #b1bdd4;
+    margin-top: 10px;
 }
 
 #second_h3 {
     color: #65C3F6;
+    margin-top: 10px;
 }

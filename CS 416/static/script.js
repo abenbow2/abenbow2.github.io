@@ -7,14 +7,17 @@ class Subject {
         this.weekly_AI_time = weekly_AI_time;
         this.study_time = study_time;
         this.GPA_difference = GPA_difference;
+        this.num_students = presemester_GPA.length;
     }
 
     CalculateGPADifference() {
         console.log("Running GPA Difference");
 
-        for (let i = 0; i < 10000; i++) {
+        for (let i = 0; i < this.num_students; i++) {
             this.GPA_difference[i] = this.postsemester_GPA[i] - this.presemester_GPA[i];
         }
+
+        return this.GPA_difference;
     }
 }
 
@@ -89,7 +92,7 @@ function Load_Scene(SubjectData) {
     // THIRD SECTION
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
-    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.GPA_difference)}`).attr("id", "second_h3");
+    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -113,19 +116,19 @@ function Load_Scatter_Plot(SubjectData) {
 function Calculate_AI_Users_Percentage(SubjectData) {
     var AI_greater_than_hour = 0;
 
-    for (let i = 0; i < 10000; i++) {
-            if (SubjectData.weekly_AI_time[i] > 1) {
-                AI_greater_than_hour++;
-            }
+    for (let i = 0; i < SubjectData.num_students; i++) {
+        if (SubjectData.weekly_AI_time[i] > 1) {
+            AI_greater_than_hour++;
         }
+    }
     
-    return Math.trunc((AI_greater_than_hour / 10000) * 100);
+    return Math.trunc((AI_greater_than_hour / SubjectData.num_students) * 100);
 }
 
 function MoreAI_vs_MoreStudy(SubjectData) {
     var AI_greater_than_study = [0,0];
 
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < SubjectData.num_students; i++) {
         if (SubjectData.weekly_AI_time[i] > SubjectData.study_time[i]) {
             AI_greater_than_study[0]++;
         } else {
@@ -133,8 +136,8 @@ function MoreAI_vs_MoreStudy(SubjectData) {
         }
     }
 
-    AI_greater_than_study[0] = Math.trunc((AI_greater_than_study[0] / 10000) * 100);
-    AI_greater_than_study[1] = Math.trunc((AI_greater_than_study[1] / 10000) * 100);
+    AI_greater_than_study[0] = Math.trunc((AI_greater_than_study[0] / SubjectData.num_students) * 100);
+    AI_greater_than_study[1] = Math.trunc((AI_greater_than_study[1] / SubjectData.num_students) * 100);
     
     return AI_greater_than_study;
 
@@ -147,13 +150,13 @@ function Calculate_Average(data) {
     console.log(data[500]);
     console.log(data[1000]);
 
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < SubjectData.num_students; i++) {
         sum += data[i];
     }
 
     console.log(sum);
-    console.log(Math.round(sum / 1000));
-    console.log(Math.round(sum / 1000) / 10.0);
-    return Math.round(sum / 1000) / 10.0;
+    console.log(Math.round(sum / (SubjectData.num_students / 10)));
+    console.log(Math.round(sum / (SubjectData.num_students / 10)) / 10.0);
+    return Math.round(sum / (SubjectData.num_students / 10)) / 10.0;
     console.log("-------------------------------------");
 }
