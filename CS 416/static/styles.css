@@ -208,3 +208,8 @@ svg {
 .buttons_box h3 {
     font-size: 24px;
 }
+
+#scatter_box {
+    display: flex;
+    flex-direction: row;
+}

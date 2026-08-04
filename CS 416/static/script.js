@@ -277,7 +277,7 @@ function Load_Bar_Chart(SubjectData) {
     bar_svg.append("text").attr("x", width / 2).attr("y", height + margin * 2).text("Difference in GPA Over 1 Semester").attr("text-anchor", "middle");
     bar_svg.append("text").attr("x", -height / 2).attr("y", 15).text("Number of Students").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
 
-    Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");
+    Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying", SubjectData, more_perc_improv);
 
     d3.select("#bar_chart_box").append("div").attr("id", "bar_chart_buttons_box").attr("class", "buttons_box");
     
