@@ -1,4 +1,4 @@
-// COLOR PALLETTE: "#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9", #b1bdd4
+// COLOR PALLETTE: "#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9", "#053A56", "#064A6F", "#0C84C6", "#064A6F", "#90D4F9", #b1bdd4
 
 class Subject {
     constructor(name, presemester_GPA, postsemester_GPA, primary_use, weekly_AI_time, study_time, GPA_difference) {
@@ -84,7 +84,7 @@ function Load_Scene(SubjectData) {
     var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
     document.getElementById("ai_users_percent").addEventListener("click", function() { Load_Pie_Chart(SubjectData); });
     ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
-    ai_users_percent.append("h4").html(`Click on a section to learn more`).attr("id", "tooltip");
+    ai_users_percent.append("h4").html(`What are they using AI for?`).attr("class", "tooltip");
 
     // SECOND SECTION
     var ai_vs_studying_pie = d3.select("#main_charts").append("div").attr("id", "ai_vs_studying");
@@ -93,6 +93,7 @@ function Load_Scene(SubjectData) {
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
     var color_pie = ["#053A56", "#b1bdd4"];
+    ai_vs_studying_pie.append("h4").html(`What impact does it have on GPA?`).attr("class", "tooltip");
 
     var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
@@ -102,6 +103,9 @@ function Load_Scene(SubjectData) {
     document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
     average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
+    average_GPA_vs_usage.append("h4").html(`What's the relationship between AI usage and academic performance?`).attr("class", "tooltip");
+
+    d3.select("#main_scene").append("h4").html(`Click on a section to learn more`).attr("class", "tooltip");
 }
 
 function Load_Pie_Chart(SubjectData) {
@@ -332,7 +336,7 @@ function Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot
 
     var dots = plot_svg.selectAll("circle").data(data);
 
-    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1.5).attr("cx", function(d) { return x(d[0]); }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#064A6F");
+    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1.5).attr("cx", function(d) { return x(d[0]) + margin; }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#39B2F3");
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {

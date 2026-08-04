@@ -140,7 +140,7 @@ button:hover {
     box-shadow: 0 4px 8px 0 rgba(8, 10, 16, 0.6);
 }
 
-#tooltip {
+.tooltip {
     font-size: 24px;
     color: #b1bdd4;
     margin-top: 10px;
