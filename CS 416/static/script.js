@@ -274,7 +274,7 @@ function Load_Bar_Chart(SubjectData) {
 
     Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");
 
-    d3.select("#bar_chart_box").append("div").attr("id", "bar_chart_buttons_box");
+    d3.select("#bar_chart_box").append("div").attr("id", "bar_chart_buttons_box").attr("class", "buttons_box");
     
     d3.select("#bar_chart_buttons_box").append("button").html(`More Time Using AI`).attr("id", "more_ai_button").attr("class", "short_button");
     document.getElementById("more_ai_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");});
@@ -326,7 +326,7 @@ function Load_Scatter_Plot(SubjectData) {
 
     Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.postsemester_GPA, x, y, width, height, margin, plot_svg);
 
-    d3.select("#scatter_box").append("div").attr("id", "scatter_buttons_box");
+    d3.select("#scatter_box").append("div").attr("id", "scatter_buttons_box").attr("class", "buttons_box");
     
     d3.select("#scatter_buttons_box").append("button").html(`Pre-Semester GPA`).attr("id", "presemGPA_button").attr("class", "short_button");
     document.getElementById("presemGPA_button").addEventListener("click", function() { Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.presemester_GPA, x, y, width, height, margin, plot_svg);});

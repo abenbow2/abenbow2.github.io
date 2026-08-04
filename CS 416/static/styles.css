@@ -185,7 +185,7 @@ svg {
     flex-direction: row;
 }
 
-#bar_chart_buttons_box {
+.buttons_box {
     display: flex;
     flex-direction: column;
     padding: 20px;
