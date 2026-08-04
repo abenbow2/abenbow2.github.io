@@ -312,7 +312,7 @@ function Load_Scatter_Plot(SubjectData) {
 
     d3.select("#main_scene").append("h2").style("text-align", "center").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
 
-    const width = 1200;
+    const width = 1000;
     const height = 800;
     const margin = 50;
 
@@ -400,13 +400,18 @@ function Transition_Slide(change) {
 
     if (current_subject < 0) {
         current_subject = 0;
-    } else if (current_subject > 2) {
-        current_subject = 2;
+    } else if (current_subject > 3) {
+        current_subject = 3;
     }
 
-    Load_Scene(subjects[current_subject]);
+    if (current_subject < 3) {
+        Load_Scene(subjects[current_subject]);
+    } else {
+        LoadConclusionSlide();
+    }
     
-    if (current_subject >= 2) {
+    
+    if (current_subject >= 3) {
         document.getElementById("transition_button").style.backgroundColor = "#8E9699";
         document.getElementById("transition_button").style.color = "#cbcccd";
 
@@ -425,4 +430,10 @@ function Transition_Slide(change) {
         document.getElementById("back_button").style.backgroundColor = "azure";
         document.getElementById("back_button").style.color = "rgb(27, 43, 59)";
     }
+}
+
+function LoadConclusionSlide() {
+    d3.select("#main_scene").html(null);
+    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
+    d3.select("#main_scene").append("div").attr("id", "main_charts");
 }

@@ -189,6 +189,7 @@ svg {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    max-width: fit-content;
 }
 
 .short_button {
