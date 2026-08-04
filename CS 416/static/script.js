@@ -287,7 +287,7 @@ function Load_Bar_Chart(SubjectData) {
     d3.select("#bar_chart_buttons_box").append("button").html(`More Time Studying`).attr("id", "more_studying_button").attr("class", "short_button");
     document.getElementById("more_studying_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_lessAI, x, y, width, height, margin, bar_svg, "More Time Studying than Using AI", SubjectData, less_perc_improv);});
 
-    d3.select("#bar_chart_buttons_box").append("h3").attr("id", "remarks1").html(`For these students, ${percent_improved}% saw an improvement in GPA.`);
+    d3.select("#bar_chart_buttons_box").append("h3").attr("id", "remarks1").html(`For these students, ${more_perc_improv}% saw an improvement in GPA.`);
     d3.select("#bar_chart_buttons_box").append("h3").attr("id", "remarks2").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("class", "second_h3");
 
     d3.select("#bar_chart_buttons_box").append("div").attr("id", "remarks");
@@ -307,8 +307,8 @@ function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title, S
 
     bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#0C84C6");
 
-    d3.select("#bar_chart_buttons_box").html(`For these students, ${percent_improved}% saw an improvement in GPA.`);
-    d3.select("#bar_chart_buttons_box").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("class", "second_h3");
+    d3.select("#remarks1").html(`For these students, ${percent_improved}% saw an improvement in GPA.`);
+    d3.select("#remarks2").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("class", "second_h3");
 }
 
 function Load_Scatter_Plot(SubjectData) {
@@ -477,8 +477,8 @@ function LoadConclusionSlide() {
         }
     }
 
-    d3.select("#conclusion").append("h3").html(`${Calculate_AI_Users_Percentage(ALL)}% of 10000 students use AI often`);
+    d3.select("#conclusion").append("h3").html(`${Calculate_AI_Users_Percentage(ALL)}% of ${ALL.num_students} students use AI often, and STEM students, unsurprisingly, use AI the most`);
     d3.select("#conclusion").append("h3").html(`The most common usage of AI is for ${most_common.toLowerCase()}`).attr("class", "second_h3");
-    d3.select("#conclusion").append("h3").html(`There is a weak correlation between using AI over traditional studying and a negative effect on GPA`);
+    d3.select("#conclusion").append("h3").html(`There is a weak correlation between using AI and a negative effect on GPA`);
     d3.select("#conclusion").append("h3").html(`Generally, spending more time studying leads to better academic performance`).attr("class", "second_h3");
 }
