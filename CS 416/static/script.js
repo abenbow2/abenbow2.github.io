@@ -93,10 +93,11 @@ function Load_Scene(SubjectData) {
     var arc = d3.arc().innerRadius(0).outerRadius(radius);
     var pie = d3.pie();
     var color_pie = ["#053A56", "#b1bdd4"];
-    ai_vs_studying_pie.append("h4").html(`What impact does it have on GPA?`).attr("class", "tooltip");
 
     var main_pie_chart_svg = ai_vs_studying_pie.append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     main_pie_chart_svg.selectAll("path").data(pie(MoreAI_vs_MoreStudy(SubjectData))).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
+
+    ai_vs_studying_pie.append("h4").html(`What impact does it have on GPA?`).attr("class", "tooltip");
 
     // THIRD SECTION
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
@@ -336,7 +337,7 @@ function Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot
 
     var dots = plot_svg.selectAll("circle").data(data);
 
-    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1.5).attr("cx", function(d) { return x(d[0]) + margin; }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#39B2F3");
+    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1.5).attr("cx", function(d) { return x(d[0]) + margin; }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("fill", "#39B2F3");
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
