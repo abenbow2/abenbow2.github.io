@@ -1,3 +1,5 @@
+// COLOR PALLETTE: "#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9", #b1bdd4
+
 class Subject {
     constructor(name, presemester_GPA, postsemester_GPA, primary_use, weekly_AI_time, study_time, GPA_difference) {
         this.name = name;
@@ -161,7 +163,7 @@ function Load_Pie_Chart(SubjectData) {
     var pie = d3.pie();
     var color_pie = ["#053A56", "#064A6F", "#0C84C6", "#39B2F3", "#90D4F9"];
 
-    var usage_pie_chart_svg = ai_usage_pie.append("div").attr("id", "pie_chart_box").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    var usage_pie_chart_svg = ai_usage_pie.append("div").attr("id", "pie_chart_box").append("div").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     usage_pie_chart_svg.selectAll("path").data(pie(usage_data)).enter().append("path").attr("d", arc).attr("fill", function(d,i){return color_pie[i]});
 
     // labels based on https://d3-graph-gallery.com/graph/pie_annotation.html
@@ -254,7 +256,7 @@ function Load_Bar_Chart(SubjectData) {
     console.log(maximum);
 
     var bar_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "bar_svg");
-    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).style("max-width", "620px").append("g").attr("transform", "translate(" + margin + "," + margin + ")");
+    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
     var x = d3.scaleBand().domain(["-2", "-1.5", "-1", "-0.5", "0", "0.5", "1", "1.5", "2"]).range([0, width]).padding(0.1);
     bar_svg.append("g").attr("transform", "translate(" + margin + "," + 850 + ")").call(d3.axisBottom(x));
@@ -288,16 +290,48 @@ function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title) {
 
     var bars = bar_svg.selectAll("rect").data(data)
 
-    bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#064A6F");
+    bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#0C84C6");
 }
 
 function Load_Scatter_Plot(SubjectData) {
     // Weekly AI usage (hours) vs GPA
     console.log("Loading scatter plot...");
     d3.select("#main_scene").html(null);
+
+    const width = 1200;
+    const height = 800;
+    const margin = 50;
+
+    var x_maximum = Math.ceil(Math.max(...(SubjectData.weekly_AI_time)) / 10) * 10;
+    var y_maximum = Math.ceil(Math.max(...(SubjectData.postsemester_GPA)));
+
+    var plot_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "plot_svg");
+    d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
+
+    var x = d3.scaleLinear().domain([0, x_maximum]).range([0, width]);
+    plot_svg.append("g").attr("transform", "translate(" + margin + "," + 850 + ")").call(d3.axisBottom(x));
+
+    var y = d3.scaleLinear().domain([0, y_maximum]).range([height, 0]);
+    plot_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
+
+    plot_svg.append("text").attr("x", width / 2).attr("y", height + margin * 2).text("Weekly AI Usage (Hours)").attr("text-anchor", "middle");
+    plot_svg.append("text").attr("x", -height / 2).attr("y", 15).text("GPA (4.0 Scale)").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
+
+    Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot_svg);
+
     d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
+}
+
+function Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot_svg) {
+    // based on https://d3-graph-gallery.com/graph/scatter_basic.html and https://d3-graph-gallery.com/graph/scatter_tooltip.html
+    
+    var data = d3.zip(x_data, y_data)
+
+    var dots = plot_svg.selectAll("circle").data(data)
+
+    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1).attr("cx", function(d) { return x(d[0]); }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#064A6F");
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
