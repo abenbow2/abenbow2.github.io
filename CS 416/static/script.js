@@ -480,4 +480,5 @@ function LoadConclusionSlide() {
     d3.select("#conclusion").append("h3").html(`${Calculate_AI_Users_Percentage(ALL)}% of 10000 students use AI often`);
     d3.select("#conclusion").append("h3").html(`The most common usage of AI is for ${most_common.toLowerCase()}`).attr("class", "second_h3");
     d3.select("#conclusion").append("h3").html(`There is a weak correlation between using AI over traditional studying and a negative effect on GPA`);
+    d3.select("#conclusion").append("h3").html(`Generally, spending more time studying leads to better academic performance`).attr("class", "second_h3");
 }
