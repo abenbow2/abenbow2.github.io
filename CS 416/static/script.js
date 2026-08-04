@@ -85,7 +85,7 @@ function Load_Scene(SubjectData) {
     // FIRST SECTION
     var ai_users_percent = d3.select("#main_charts").append("div").attr("id", "ai_users_percent");
     document.getElementById("ai_users_percent").addEventListener("click", function() { Load_Pie_Chart(SubjectData); });
-    ai_users_percent.append("h3").html(`<strong>${Calculate_AI_Users_Percentage(SubjectData)}%</strong> of students use AI more than an hour each week`);
+    ai_users_percent.append("h3").html(`Of ${SubjectData.num_students} students, <em>${Calculate_AI_Users_Percentage(SubjectData)}%</em> use AI more than an hour each week`);
     ai_users_percent.append("h4").html(`What are they using AI for?`).attr("class", "tooltip");
 
     // SECOND SECTION
@@ -473,6 +473,6 @@ function LoadConclusionSlide() {
     }
 
     d3.select("#conclusion").append("h3").html(`${Calculate_AI_Users_Percentage(ALL)}% of 10000 students use AI often`);
-    d3.select("#conclusion").append("h3").html(`The most common usage of AI is for ${most_common.toLowerCase()}% of 10000 students use AI often`).attr("class", "second_h3");
-    d3.select("#conclusion").append("h3").html(`There is weak correlation between using AI over traditional studying and a negative effect on GPA`);
+    d3.select("#conclusion").append("h3").html(`The most common usage of AI is for ${most_common.toLowerCase()}`).attr("class", "second_h3");
+    d3.select("#conclusion").append("h3").html(`There is a weak correlation between using AI over traditional studying and a negative effect on GPA`);
 }

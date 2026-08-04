@@ -213,3 +213,8 @@ svg {
     display: flex;
     flex-direction: row;
 }
+
+#flavor {
+    font-size: 24px;
+    color: aliceblue;
+}
