@@ -298,6 +298,8 @@ function Load_Scatter_Plot(SubjectData) {
     console.log("Loading scatter plot...");
     d3.select("#main_scene").html(null);
 
+    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
+
     const width = 1200;
     const height = 800;
     const margin = 50;
@@ -314,12 +316,11 @@ function Load_Scatter_Plot(SubjectData) {
     var y = d3.scaleLinear().domain([0, y_maximum]).range([height, 0]);
     plot_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
-    plot_svg.append("text").attr("x", width / 2).attr("y", height + margin * 2).text("Weekly AI Usage (Hours)").attr("text-anchor", "middle");
+    plot_svg.append("text").attr("x", width / 2).attr("y", height + 80).text("Weekly AI Usage (Hours)").attr("text-anchor", "middle");
     plot_svg.append("text").attr("x", -height / 2).attr("y", 15).text("GPA (4.0 Scale)").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
 
     Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot_svg);
 
-    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
 }
@@ -327,11 +328,11 @@ function Load_Scatter_Plot(SubjectData) {
 function Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot_svg) {
     // based on https://d3-graph-gallery.com/graph/scatter_basic.html and https://d3-graph-gallery.com/graph/scatter_tooltip.html
     
-    var data = d3.zip(x_data, y_data)
+    var data = d3.zip(x_data, y_data);
 
-    var dots = plot_svg.selectAll("circle").data(data)
+    var dots = plot_svg.selectAll("circle").data(data);
 
-    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1).attr("cx", function(d) { return x(d[0]); }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#064A6F");
+    dots.enter().append("circle").merge(dots).transition().duration(500).attr("r", 1.5).attr("cx", function(d) { return x(d[0]); }).attr("cy", function(d) { return y(d[1]) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d[1]); }).attr("fill", "#064A6F");
 }
 
 function Calculate_AI_Users_Percentage(SubjectData) {
