@@ -79,6 +79,11 @@ a {
     flex: 1
 }
 
+#pie_common {
+    max-width: 80%;
+    font-size: 64px;
+}
+
 #main_charts {
     display: flex;
     flex-direction: row;
@@ -152,7 +157,7 @@ button:hover {
 
 #pie_key {
     max-width: 200px;
-    margin-left: -20px;
+    margin-left: 10px;
 }
 
 #pie_key p {
