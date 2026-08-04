@@ -55,9 +55,11 @@ var HUM_StudyTime = [8.13, 15.15, 10.84, 10.61, 8.24, 7.46, 10.81, 11.3, 11.84, 
 
 var HUMANITIES = new Subject("the Humanities", HUM_PreSemesterGPA, HUM_PostSemesterGPA, HUM_PrimaryUse, HUM_WeeklyAITime, HUM_StudyTime, HUM_GPADifference);
 
+var ALL = new Subject("all subjects", [...STEM_PreSemesterGPA, ...ARTS_PreSemesterGPA, ...HUM_PreSemesterGPA], [...STEM_PostSemesterGPA, ...ARTS_PostSemesterGPA, ...HUM_PostSemesterGPA], [...STEM_PrimaryUse, ...ARTS_PrimaryUse, ...HUM_PrimaryUse], [...STEM_WeeklyAITime, ...ARTS_WeeklyAITime, ...HUM_WeeklyAITime], [], []);
+
 var current_subject = 0;
 
-var subjects = [STEM, ARTS, HUMANITIES];
+var subjects = [STEM, ARTS, HUMANITIES, ALL];
 
 document.addEventListener('DOMContentLoaded', function() {
     current_subject = 0;
@@ -103,7 +105,7 @@ function Load_Scene(SubjectData) {
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
     document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
-    average_GPA_vs_usage.append("h3").html(`The average post-semester GPA is ${Calculate_Average(SubjectData.postsemester_GPA)}, and the average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
+    average_GPA_vs_usage.append("h3").html(`The average post-semester GPA is ${Calculate_Average(SubjectData.postsemester_GPA)}, and the average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("class", "second_h3");
     average_GPA_vs_usage.append("h4").html(`What's the relationship between AI usage and academic performance?`).attr("class", "tooltip");
 
     d3.select("#main_scene").append("h4").html(`Click on a section to learn more`).attr("class", "tooltip");
@@ -250,7 +252,6 @@ function Load_Bar_Chart(SubjectData) {
             } else {
                 bar_data_lessAI[8]++;
             }
-            less_total++;
         }
     }
 
@@ -302,7 +303,7 @@ function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title, S
     bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#0C84C6");
 
     d3.select("#bar_chart_buttons_box").append("h3").html(`For these students, ${percent_improved}% saw an improvement in GPA.`);
-    d3.select("#bar_chart_buttons_box").append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
+    d3.select("#bar_chart_buttons_box").append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("class", "second_h3");
 }
 
 function Load_Scatter_Plot(SubjectData) {
@@ -434,6 +435,44 @@ function Transition_Slide(change) {
 
 function LoadConclusionSlide() {
     d3.select("#main_scene").html(null);
-    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name}`);
+    d3.select("#main_scene").append("h2").html(`Overall...`);
     d3.select("#main_scene").append("div").attr("id", "main_charts");
+    d3.select("#main_charts").append("div").attr("id", "conclusion");
+
+    var copywriting_count = 0;
+    var summary_count = 0;
+    var debugging_count = 0;
+    var ideation_count = 0;
+    var answer_count = 0;
+    
+    for (let i = 0; i < ALL.num_students; i++) {
+        if (ALL.primary_use[i] == "Copywriting/Drafting") {
+            copywriting_count++;
+        } else if (ALL.primary_use[i] == "Summarizing Reading") {
+            summary_count++;
+        } else if (ALL.primary_use[i] == "Debugging/Troubleshooting") {
+            debugging_count++;
+        } else if (ALL.primary_use[i] == "Ideation") {
+            ideation_count++;
+        } else if (ALL.primary_use[i] == "Direct Answer Generation") {
+            answer_count++;
+        }
+    }
+
+    var usage_data = [copywriting_count, summary_count, debugging_count, ideation_count, answer_count];
+    var labels = ["Copywriting", "Summarization", "Debugging", "Ideation", "Generating Answers"];
+    var max_i = 0;
+    var second_max_i = 0;
+    var most_common = "";
+
+    for (let i = 0; i < 5; i++) {
+        if (usage_data[i] >= usage_data[max_i]) {
+            max_i = i;
+            most_common = labels[i];
+        }
+    }
+
+    d3.select("#conclusion").append("h3").html(`${Calculate_AI_Users_Percentage(ALL)}% of 10000 students use AI often`);
+    d3.select("#conclusion").append("h3").html(`The most common usage of AI is for ${most_common.toLowerCase()}% of 10000 students use AI often`).attr("class", "second_h3");
+    d3.select("#conclusion").append("h3").html(`There is weak correlation between using AI over traditional studying and a negative effect on GPA`);
 }
