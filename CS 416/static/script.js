@@ -309,10 +309,10 @@ function Load_Scatter_Plot(SubjectData) {
     const height = 800;
     const margin = 50;
 
-    var x_maximum = Math.ceil(Math.max(...(SubjectData.weekly_AI_time)) / 10) * 10;
+    var x_maximum = Math.ceil(Math.max(...(SubjectData.weekly_AI_time)) / 5) * 5;
     var y_maximum = Math.ceil(Math.max(...(SubjectData.postsemester_GPA)));
 
-    var plot_svg = d3.select("#main_scene").append("div").attr("id", "bar_chart_box").append("svg").attr("id", "plot_svg");
+    var plot_svg = d3.select("#main_scene").append("div").attr("id", "scatter_box").append("svg").attr("id", "plot_svg");
     d3.select("svg").attr("width", width + 2 * margin).attr("height", height + 2 * margin).append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
     var x = d3.scaleLinear().domain([0, x_maximum]).range([0, width]);
@@ -325,6 +325,14 @@ function Load_Scatter_Plot(SubjectData) {
     plot_svg.append("text").attr("x", -height / 2).attr("y", 15).text("GPA (4.0 Scale)").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
 
     Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.postsemester_GPA, x, y, width, height, margin, plot_svg);
+
+    d3.select("#scatter_box").append("div").attr("id", "scatter_buttons_box");
+    
+    d3.select("#scatter_buttons_box").append("button").html(`Pre-Semester GPA`).attr("id", "presemGPA_button").attr("class", "short_button");
+    document.getElementById("presemGPA_button").addEventListener("click", function() { Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.presemester_GPA, x, y, width, height, margin, plot_svg);});
+
+    d3.select("#scatter_buttons_box").append("button").html(`Post-Semester GPA`).attr("id", "postsemGPA_button").attr("class", "short_button");
+    document.getElementById("postsemGPA_button").addEventListener("click", function() { Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.postsemester_GPA, x, y, width, height, margin, plot_svg);});
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
