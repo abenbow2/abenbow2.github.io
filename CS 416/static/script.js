@@ -298,7 +298,7 @@ function Load_Scatter_Plot(SubjectData) {
     console.log("Loading scatter plot...");
     d3.select("#main_scene").html(null);
 
-    d3.select("#main_scene").append("h2").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
+    d3.select("#main_scene").append("h2").style("text-align", "center").html(`AI Usage Among Students in ${SubjectData.name} vs Academic Performance`);
 
     const width = 1200;
     const height = 800;
@@ -316,10 +316,10 @@ function Load_Scatter_Plot(SubjectData) {
     var y = d3.scaleLinear().domain([0, y_maximum]).range([height, 0]);
     plot_svg.append("g").attr("transform", "translate(" + margin + "," + margin + ")").call(d3.axisLeft(y));
 
-    plot_svg.append("text").attr("x", width / 2).attr("y", height + 80).text("Weekly AI Usage (Hours)").attr("text-anchor", "middle");
+    plot_svg.append("text").attr("x", width / 2).attr("y", height + 85).text("Weekly AI Usage (Hours)").attr("text-anchor", "middle");
     plot_svg.append("text").attr("x", -height / 2).attr("y", 15).text("GPA (4.0 Scale)").attr("text-anchor", "middle").attr("transform", "rotate(-90)");
 
-    Generate_Scatter_Plot(x_data, y_data, x, y, width, height, margin, plot_svg);
+    Generate_Scatter_Plot(SubjectData.weekly_AI_time, SubjectData.postsemester_GPA, x, y, width, height, margin, plot_svg);
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
