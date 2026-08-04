@@ -103,7 +103,7 @@ function Load_Scene(SubjectData) {
     var average_GPA_vs_usage = d3.select("#main_charts").append("div").attr("id", "average_comparison");
     document.getElementById("average_comparison").addEventListener("click", function() { Load_Scatter_Plot(SubjectData); });
     average_GPA_vs_usage.append("h3").html(`Students spend, on average, ${Calculate_Average(SubjectData.weekly_AI_time)} hours every week using AI`);
-    average_GPA_vs_usage.append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
+    average_GPA_vs_usage.append("h3").html(`The average post-semester GPA is ${Calculate_Average(SubjectData.postsemester_GPA)}, and the average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
     average_GPA_vs_usage.append("h4").html(`What's the relationship between AI usage and academic performance?`).attr("class", "tooltip");
 
     d3.select("#main_scene").append("h4").html(`Click on a section to learn more`).attr("class", "tooltip");
@@ -250,8 +250,12 @@ function Load_Bar_Chart(SubjectData) {
             } else {
                 bar_data_lessAI[8]++;
             }
+            less_total++;
         }
     }
+
+    var more_perc_improv = Math.trunc(((bar_data_moreAI[4] + bar_data_moreAI[5] + bar_data_moreAI[6] + bar_data_moreAI[7] + bar_data_moreAI[8]) / (bar_data_moreAI[0] + bar_data_moreAI[1] + bar_data_moreAI[2] + bar_data_moreAI[3] + bar_data_moreAI[4] + bar_data_moreAI[5] + bar_data_moreAI[6] + bar_data_moreAI[7] + bar_data_moreAI[8])) * 100);
+    var less_perc_improv = Math.trunc(((bar_data_lessAI[4] + bar_data_lessAI[5] + bar_data_lessAI[6] + bar_data_lessAI[7] + bar_data_lessAI[8]) / (bar_data_lessAI[0] + bar_data_lessAI[1] + bar_data_lessAI[2] + bar_data_lessAI[3] + bar_data_lessAI[4] + bar_data_lessAI[5] + bar_data_lessAI[6] + bar_data_lessAI[7] + bar_data_lessAI[8])) * 100);
 
     const width = 800;
     const height = 800;
@@ -277,16 +281,16 @@ function Load_Bar_Chart(SubjectData) {
     d3.select("#bar_chart_box").append("div").attr("id", "bar_chart_buttons_box").attr("class", "buttons_box");
     
     d3.select("#bar_chart_buttons_box").append("button").html(`More Time Using AI`).attr("id", "more_ai_button").attr("class", "short_button");
-    document.getElementById("more_ai_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying");});
+    document.getElementById("more_ai_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_moreAI, x, y, width, height, margin, bar_svg, "More Time Using AI than Studying", SubjectData, more_perc_improv);});
 
     d3.select("#bar_chart_buttons_box").append("button").html(`More Time Studying`).attr("id", "more_studying_button").attr("class", "short_button");
-    document.getElementById("more_studying_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_lessAI, x, y, width, height, margin, bar_svg, "More Time Studying than Using AI");});
+    document.getElementById("more_studying_button").addEventListener("click", function() { Generate_Bar_Graph(bar_data_lessAI, x, y, width, height, margin, bar_svg, "More Time Studying than Using AI", SubjectData, less_perc_improv);});
 
     d3.select("#main_scene").append("button").html(`Return to main scene`).attr("id", "return_button");
     document.getElementById("return_button").addEventListener("click", function() { Load_Scene(subjects[current_subject]);});
 }
 
-function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title) {
+function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title, SubjectData, percent_improved) {
     // transition based on https://d3-graph-gallery.com/graph/barplot_button_data_simple.html
     d3.select("#bar_chart_title").html(`GPA Progress of Students Who Spent ${title}`);
     console.log(data);
@@ -296,6 +300,9 @@ function Generate_Bar_Graph(data, x, y, width, height, margin, bar_svg, title) {
     var bars = bar_svg.selectAll("rect").data(data)
 
     bars.enter().append("rect").merge(bars).transition().duration(500).attr("x", function(d, i) { return x(domain_values[i]); }).attr("y", function(d, i) { return y(d) + margin; }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y(d); }).attr("fill", "#0C84C6");
+
+    d3.select("#bar_chart_buttons_box").append("h3").html(`For these students, ${percent_improved}% saw an improvement in GPA.`);
+    d3.select("#bar_chart_buttons_box").append("h3").html(`The average change in GPA over one semester is ${Calculate_Average(SubjectData.CalculateGPADifference())}`).attr("id", "second_h3");
 }
 
 function Load_Scatter_Plot(SubjectData) {
